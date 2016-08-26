@@ -2,7 +2,9 @@
   "work": [
     {
       "id": 1,
+      "name": "aviv.nyc",
       "company": "Aviv",
+      "link" : "https://aviv.nyc",
       "position": "Volunteer Developer",
       "summary": "A venue website with data pulled from the facebook graph API. The venue owners don't need to worry about updating another thing as they update facebook regularly. React front end, Haskell backend.",
       "tags": [
@@ -11,6 +13,8 @@
     },
     {
       "id": 0,
+      "name": "#LetsJoinHands",
+      "link" : "https://twitter.com/search?f=videos&vertical=default&q=%40Toyota%20%23LetsJoinHands&src=typd",
       "company": "Wildlife",
       "position": "Contract Developer",
       "summary": "An interactive drawing experience between LA and NYC using C++, Cinder, and a custom UDP video streaming protocol over a mobile network for Toyota's #LetsJoinHands campaign",

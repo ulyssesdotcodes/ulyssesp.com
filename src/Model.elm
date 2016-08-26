@@ -7,35 +7,39 @@ type Tag
   | Performance
   | Web
   | Mobile
-  | None
 
 tagDecoder : String -> Json.Decoder (Tag)
-tagDecoder tag = Json.succeed (tagParser tag)
+tagDecoder tag =
+  case tagParser tag of
+    Just t -> Json.succeed t
+    Nothing -> Json.fail "Couldn't parse tag"
 
-tagParser : String -> Tag
+tagParser : String -> Maybe Tag
 tagParser tag =
   case tag of
-    "interactive" -> Interactive
-    "performance" -> Performance
-    "web" -> Web
-    "mobile" -> Mobile
-    _ -> None
+    "interactive" -> Just Interactive
+    "performance" -> Just Performance
+    "web" -> Just Web
+    "mobile" -> Just Mobile
+    _ -> Nothing
 
 type alias Work =
   { tags : List Tag
+  , name : String
+  , link : String
   , company : String
-  , position : String
   , summary : String
   }
 
 workDecoder : Json.Decoder (List Work)
 workDecoder =
   let work =
-        Json.object4 Work
+        Json.object5 Work
           ("tags" := Json.list (Json.string `andThen` tagDecoder))
-          ("summary" := Json.string)
+          ("name" := Json.string)
+          ("link" := Json.string)
           ("company" := Json.string)
-          ("position" := Json.string)
+          ("summary" := Json.string)
   in
     "work" := Json.list work
 

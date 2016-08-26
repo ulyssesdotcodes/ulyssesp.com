@@ -1,6 +1,7 @@
 module Main exposing (..)
 
 import Html exposing (..)
+import Html.Attributes exposing (class)
 import Html.App as App
 import Http
 import Json.Decode as Json exposing ((:=))
@@ -29,7 +30,7 @@ type Msg
 -- VIEW
 view : Model -> Html Msg
 view model =
-  div []
+  div [ class "clearfix" ]
     [ App.map ModifyList (WL.view model) ]
 
 -- UPDATE
