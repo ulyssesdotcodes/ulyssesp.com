@@ -72,7 +72,8 @@ tagSelect cur tag =
 
 filterSelect : String -> Maybe Tag -> Maybe Tag -> Html Msg
 filterSelect str mt cur =
-  li [class ("inline-block mr1" ++ (if cur == mt then " bold" else "")), onClick (Filter mt)] [text str]
+  li [class ("inline-block mr1" ++ (if cur == mt then " bold" else "")), onClick (Filter mt)]
+    [a [href "#", class "color-inherit text-decoration-none"] [text str]]
 
 filterText : Tag -> String
 filterText tag =

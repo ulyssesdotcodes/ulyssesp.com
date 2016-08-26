@@ -26,8 +26,8 @@ tagParser tag =
 type alias Work =
   { tags : List Tag
   , name : String
-  , link : String
-  , company : String
+  , link : Maybe String
+  , company : Maybe String
   , summary : String
   }
 
@@ -37,8 +37,8 @@ workDecoder =
         Json.object5 Work
           ("tags" := Json.list (Json.string `andThen` tagDecoder))
           ("name" := Json.string)
-          ("link" := Json.string)
-          ("company" := Json.string)
+          (Json.maybe ("link" := Json.string))
+          (Json.maybe ("company" := Json.string))
           ("summary" := Json.string)
   in
     "work" := Json.list work

@@ -1,7 +1,7 @@
 module Main exposing (..)
 
 import Html exposing (..)
-import Html.Attributes exposing (class)
+import Html.Attributes exposing (class, target, href)
 import Html.App as App
 import Http
 import Json.Decode as Json exposing ((:=))
@@ -31,7 +31,24 @@ type Msg
 view : Model -> Html Msg
 view model =
   div [ class "clearfix" ]
-    [ App.map ModifyList (WL.view model) ]
+    [ div [class "max-width-3 mx-auto"]
+        [ div [class "right inline-block"]
+            [ h2 [class "mt0"]
+                [ icon "github" "https://github.com/ulyssesp"
+                , icon "youtube-play" "https://www.youtube.com/user/upopple"
+                ]
+            ]
+        , div []
+            [h1 [] [text "Ulysses Popple"]
+            , p [] [text "I architect pixels with my mind, some computing power, and a little bit of finger movement."]
+            ]
+        ]
+    , App.map ModifyList (WL.view model)
+    ]
+
+icon : String -> String -> Html Msg
+icon icon link =
+  a [href link, target "_blank", class "pl2 color-inherit"] [i [class ("fa fa-" ++ icon)] []]
 
 -- UPDATE
 

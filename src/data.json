@@ -1,7 +1,6 @@
 {
   "work": [
     {
-      "id": 1,
       "name": "aviv.nyc",
       "company": "Aviv",
       "link" : "https://aviv.nyc",
@@ -12,14 +11,76 @@
       ]
     },
     {
-      "id": 0,
       "name": "#LetsJoinHands",
       "link" : "https://twitter.com/search?f=videos&vertical=default&q=%40Toyota%20%23LetsJoinHands&src=typd",
       "company": "Wildlife",
-      "position": "Contract Developer",
+      "position": "Contract Developer, team of two",
       "summary": "An interactive drawing experience between LA and NYC using C++, Cinder, and a custom UDP video streaming protocol over a mobile network for Toyota's #LetsJoinHands campaign",
       "tags": [
         "interactive"
+      ]
+    },
+    {
+      "name": "Oscillare",
+      "link" : "https://github.com/ulyssesp/oscillare",
+      "position": "Sole Developer",
+      "summary": "Live coding environment for video djing.",
+      "tags": [
+        "interactive",
+        "performance"
+      ]
+    },
+    {
+      "name": "Trello Android",
+      "link" : "https://play.google.com/store/apps/details?id=com.trello",
+      "position": "Developer, team of 3-4",
+      "summary": "A project management application. Featured numerous times on the Google Play store and received the Editor's Choice award.",
+      "tags": [
+        "mobile"
+      ]
+    },
+    {
+      "name": "Trello Android Wear",
+      "link" : "http://blog.trello.com/trello-on-your-wrist/",
+      "position": "Sole Developer",
+      "summary": "One of the first apps available for Android Wear, built with the pre-release SDK.",
+      "tags": [
+        "mobile"
+      ]
+    },
+    {
+      "name": "Trello Web",
+      "link" : "https://trello.com",
+      "position": "Developer, team of 3",
+      "summary": "A project management application with more than 10 million users.",
+      "tags": [
+        "web"
+      ]
+    },
+    {
+      "name": "Trello for Google Nearby",
+      "position": "Sole Developer",
+      "summary": "Google Nearby integration for Trello that allows the user to easily add neaby users to a board.",
+      "tags": [
+        "mobile"
+      ]
+    },
+    {
+      "name": "kimraebass.com",
+      "link" : "https://kimraebass.com",
+      "position": "Sole Developer",
+      "summary": "Website for Kim Bass, artist. In operation since 2006",
+      "tags": [
+        "web"
+      ]
+    },
+    {
+      "name": "AltahNet Health Tracker",
+      "link" : "https://play.google.com/store/apps/details?id=net.altah.holistichealthtracker&hl=en",
+      "position": "Sole Developer",
+      "summary": "An Android health tracker for alternative healthcare provider AltahNet.",
+      "tags": [
+        "mobile"
       ]
     }
   ]
