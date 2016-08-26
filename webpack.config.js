@@ -1,4 +1,5 @@
 var path = require("path");
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -48,5 +49,8 @@ module.exports = {
     inline: true,
     stats: { colors: true },
   },
+  plugins: [
+    new CopyWebpackPlugin([ { from: './src/data.json' } ])
+  ]
 
 };

@@ -1,23 +1,22 @@
 module Main exposing (..)
 
 import Html exposing (..)
-import Html.App
+import Html.App as App
 import Http
 import Json.Decode as Json exposing ((:=))
 import Task exposing (..)
 
+import Model exposing (..)
+import WorkList as WL
+
 -- MODEL
 
-type alias Model = String
+type alias Model = WL.Model
 
 init : (Model, Cmd Msg)
 init =
-  ( "Hello", fetchData )
+  ( WL.init [], fetchData )
 
-type alias Work =
-  { company : String
-  , position : String
-  }
 
 -- MESSAGES
 type Msg
@@ -25,12 +24,13 @@ type Msg
   | FetchFail Http.Error
   | FetchSucceed (List Work)
   | FetchData
+  | ModifyList WL.Msg
 
 -- VIEW
 view : Model -> Html Msg
 view model =
   div []
-    [ text model ]
+    [ App.map ModifyList (WL.view model) ]
 
 -- UPDATE
 
@@ -39,15 +39,21 @@ update msg model =
   case msg of
     NoOp ->
       (model, Cmd.none)
-    FetchFail _ ->
-      (model, Cmd.none)
+    FetchFail err ->
+      let
+        x = Debug.log "err" err
+      in
+        (model, Cmd.none)
     FetchSucceed data ->
       let
         x = Debug.log "test" data
       in
-        (model, Cmd.none)
+        (WL.newData data model, Cmd.none)
     FetchData ->
       (model, fetchData)
+
+    ModifyList msg ->
+      (WL.update msg model, Cmd.none)
 
 
 
@@ -59,7 +65,7 @@ subscriptions model =
 -- MAIN
 main : Program Never
 main =
-  Html.App.program
+  App.program
     { init = init
     , view = view
     , update = update
@@ -68,14 +74,6 @@ main =
 
 fetchData : Cmd Msg
 fetchData =
-  Task.perform FetchFail FetchSucceed (Http.get works ("./data.json"))
+  Task.perform FetchFail FetchSucceed (Http.get workDecoder ("./data.json"))
 
-works : Json.Decoder (List Work)
-works =
-  let work =
-      Json.object2 Work
-        ("company" := Json.string)
-        ("position" := Json.string)
-  in
-    "work" := Json.list work
 
