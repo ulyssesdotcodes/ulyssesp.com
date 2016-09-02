@@ -1,0 +1,117 @@
+@import url(https://fonts.googleapis.com/css?family=Anonymous+Pro|PT+Sans);
+@import 'settings';
+@import 'foundation';
+
+html {
+    overflow-y: scroll;
+}
+
+body {
+    font-family: 'PT Sans', sans-serif;
+}
+
+h1, h3 {
+    font-family: 'Anonymous Pro', monospace;
+}
+
+h3 {
+    font-size: 2.2em;
+}
+
+a h3 {
+    color: black;
+}
+
+.work-item {
+    display: block;
+    padding-bottom: 1.2em; 
+}
+
+.inline {
+    display: inline;
+}
+
+.row {
+    margin-bottom: 1em;
+}
+
+.header {
+    margin-top: 1em;
+}
+
+.header i {
+    font-size: 0.7em;
+    margin-left: 0.5em;
+    color: black;
+}
+
+.work-name {
+    padding-top: 0.5em;
+}
+
+.list-filter {
+    margin-bottom: 2em;
+    margin-top: 2em;
+}
+
+.media {
+    margin-top: 0.8em;
+}
+
+// Image gallery
+.gallery {
+    position: relative;
+    overflow: hidden;
+    margin: 20px auto 0 auto;
+
+    ul {
+        position: relative;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        white-space: nowrap;
+        width: 661px;
+        z-index: 1;
+
+        li {
+            position: relative;
+            display: inline-block;
+            width: 661px;
+            text-align: center;
+
+            img {
+                max-width: 661px;
+                opacity: 0.8;
+            }
+
+            img.is-active {
+                opacity: 1;
+            }
+        }
+    }
+
+    i {
+        position: relative;
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+        font-size: 1.2em;
+    }
+
+    .left, .right{
+        position: relative;
+        height: 343px;
+        cursor: pointer;
+        display: block;
+        z-index: 100;
+    }
+
+    .left {
+        float: left;
+    }
+
+    .right {
+        float: right;
+    }
+}

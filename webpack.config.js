@@ -5,6 +5,11 @@ module.exports = {
   entry: {
     app: [
       './src/index.js'
+    ],
+    "vendor": [
+      "!!script!jquery/dist/jquery.min.js",
+      "!!script!foundation-sites/dist/foundation.min.js",
+      "!!script!motion-ui/dist/motion-ui.min.js"
     ]
   },
 
@@ -12,7 +17,9 @@ module.exports = {
     path: path.resolve(__dirname + '/dist'),
     filename: '[name].js',
   },
-
+  externals: {
+    jquery: "jQuery"
+  },
   module: {
     loaders: [
       {
@@ -44,7 +51,9 @@ module.exports = {
 
     noParse: /\.elm$/,
   },
-
+  sassLoader: {
+    includePaths: [path.resolve(__dirname, "node_modules")]
+  },
   devServer: {
     inline: true,
     stats: { colors: true },

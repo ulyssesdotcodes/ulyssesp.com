@@ -1,30 +1,45 @@
 {
   "work": [
     {
-      "name": "aviv.nyc",
-      "company": "Aviv",
-      "link" : "https://aviv.nyc",
-      "position": "Volunteer Developer",
-      "summary": "A venue website with data pulled from the facebook graph API. The venue owners don't need to worry about updating another thing as they update facebook regularly. React front end, Haskell backend.",
-      "tags": [
-        "web"
-      ]
-    },
-    {
       "name": "#LetsJoinHands",
+      "slug": "lets-join-hands",
       "link" : "https://twitter.com/search?f=videos&vertical=default&q=%40Toyota%20%23LetsJoinHands&src=typd",
       "company": "Wildlife",
       "position": "Contract Developer, team of two",
       "summary": "An interactive drawing experience between LA and NYC using C++, Cinder, and a custom UDP video streaming protocol over a mobile network for Toyota's #LetsJoinHands campaign",
+      "description": "For three days, in collaboration with Saatchi & Saatchi, Wildlife had a booth in Herald Square, New York, and XYZ, Los Angeles, an interactive experience for Toyota's campaign. Along with one other developer, I developed an application which connected two users across the country in real time. The application let users draw on the screen with their fingers while watching a live webcam feed of the other person. By combining the drawings on screen, it allowed them to draw together and encouraged them with prompts like \"Draw yourselves under the sea.\" and \"Draw yourselves on a perfect sunny day.\" The videos of drawing and webcam were combined together into a short clip which was posted on the @Toyota twitter feed. My favorite part was when a man with no arms came in and drew on the screen with his feet -- he was quite an impressive artist! \n\n Satchi & Satchi were so impressed with this project that they considered putting it up permanently in their offices.",
+      "video": { "source": "youtube", "id":"kRe7UnYbLy8" },
+      "images": [
+        { "source" : "cloudinary", "id": "crowd.jpg" },
+        { "source": "cloudinary", "id": "girl.jpg" },
+        { "source": "cloudinary", "id": "LetsJoinFeet.jpg" }
+      ],
       "tags": [
         "interactive"
       ]
     },
     {
+      "name": "aviv.nyc",
+      "slug": "aviv-nyc",
+      "company": "Aviv",
+      "link" : "https://aviv.nyc",
+      "position": "Volunteer Developer",
+      "summary": "A venue website with data pulled from the facebook graph API. The venue owners don't need to worry about updating another thing as they update facebook regularly. React front end, Haskell backend.",
+      "description": "",
+      "images" : [],
+      "tags": [
+        "web",
+        "mobile"
+      ]
+    },
+    {
       "name": "Oscillare",
+      "slug": "oscillare",
       "link" : "https://github.com/ulyssesp/oscillare",
       "position": "Sole Developer",
       "summary": "Live coding environment for video djing.",
+      "description": "",
+      "images" : [],
       "tags": [
         "interactive",
         "performance"
@@ -32,53 +47,71 @@
     },
     {
       "name": "Trello Android",
+      "slug": "trello-android",
       "link" : "https://play.google.com/store/apps/details?id=com.trello",
       "position": "Developer, team of 3-4",
       "summary": "A project management application. Featured numerous times on the Google Play store and received the Editor's Choice award.",
+      "description": "",
+      "images" : [],
       "tags": [
         "mobile"
       ]
     },
     {
       "name": "Trello Android Wear",
+      "slug": "trello-android-wear",
       "link" : "http://blog.trello.com/trello-on-your-wrist/",
       "position": "Sole Developer",
       "summary": "One of the first apps available for Android Wear, built with the pre-release SDK.",
+      "description": "",
+      "images" : [],
       "tags": [
         "mobile"
       ]
     },
     {
       "name": "Trello Web",
+      "slug": "trello-web",
       "link" : "https://trello.com",
       "position": "Developer, team of 3",
       "summary": "A project management application with more than 10 million users.",
+      "description": "",
+      "images" : [],
       "tags": [
         "web"
       ]
     },
     {
       "name": "Trello for Google Nearby",
+      "slug": "trello-nearby",
       "position": "Sole Developer",
       "summary": "Google Nearby integration for Trello that allows the user to easily add neaby users to a board.",
+      "description": "",
+      "images" : [],
       "tags": [
         "mobile"
       ]
     },
     {
       "name": "kimraebass.com",
+      "slug": "kimraebass",
       "link" : "https://kimraebass.com",
       "position": "Sole Developer",
       "summary": "Website for Kim Bass, artist. In operation since 2006",
+      "description": "",
+      "images" : [],
       "tags": [
         "web"
       ]
     },
     {
       "name": "AltahNet Health Tracker",
+      "slug": "altahnet",
       "link" : "https://play.google.com/store/apps/details?id=net.altah.holistichealthtracker&hl=en",
       "position": "Sole Developer",
       "summary": "An Android health tracker for alternative healthcare provider AltahNet.",
+      "description": "",
+      "images" : [],
       "tags": [
         "mobile"
       ]

@@ -30,17 +30,18 @@ type Msg
 -- VIEW
 view : Model -> Html Msg
 view model =
-  div [ class "clearfix" ]
-    [ div [class "max-width-3 mx-auto"]
-        [ div [class "right inline-block"]
-            [ h2 [class "mt0"]
-                [ icon "github" "https://github.com/ulyssesp"
-                , icon "youtube-play" "https://www.youtube.com/user/upopple"
-                ]
-            ]
-        , div []
-            [h1 [] [text "Ulysses Popple"]
-            , p [] [text "I architect pixels with my mind, some computing power, and a little bit of finger movement."]
+  div []
+    [ div [class ""]
+        [ div [class "header"]
+            [div [class "row"]
+               [ h1 [class "columns"] [text "Ulysses Popple"]
+               , h2 [class "shrink columns"]
+                 [ icon "github" "https://github.com/ulyssesp"
+                 , icon "youtube-play" "https://www.youtube.com/user/upopple"
+                 ]
+               ]
+            , div [class "row"]
+                [div [class "small-12 columns"] [text "I architect pixels with planning, some computing power, and a small bit of finger movement."]]
             ]
         ]
     , App.map ModifyList (WL.view model)
@@ -78,7 +79,7 @@ update msg model =
 -- SUBSCRIPTIONS
 subscriptions : Model -> Sub Msg
 subscriptions model =
-  Sub.none
+  Sub.map ModifyList <| WL.subscriptions model
 
 -- MAIN
 main : Program Never

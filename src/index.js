@@ -1,8 +1,9 @@
 'use strict';
 
-require('ace-css/css/ace.css');
-require('font-awesome/css/font-awesome.css');
-require('animate.css/animate.min.css');
+// import 'foundation-sites/dist/foundation-flex.min.css';
+require("font-awesome-webpack");
+
+require("!style!css!sass!./styles.scss");
 
 // Require index.html so it gets copied to dist
 require('./index.html');
