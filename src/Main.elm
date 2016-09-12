@@ -37,11 +37,13 @@ view model =
                [ h1 [class "columns"] [text "Ulysses Popple"]
                , h2 [class "shrink columns"]
                  [ icon "github" "https://github.com/ulyssesp"
-                 , icon "youtube-play" "https://www.youtube.com/user/upopple"
+                 , icon "youtube-play" "https://www.youtube.com/c/UlyssesPopple"
                  ]
                ]
             , div [class "row"]
                 [div [class "small-12 columns"] [text "I architect pixels with planning, some computing power, and a small bit of finger movement."]]
+            , div [class "row"]
+              [div [class "small-12 columns"] [text "Below are a selection of projects and performances that I enjoyed working on, and some text about what I enjoyed about them."]]
             ]
         ]
     , App.map ModifyList (WL.view model)

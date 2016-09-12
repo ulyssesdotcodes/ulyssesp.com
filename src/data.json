@@ -7,7 +7,7 @@
       "company": "Wildlife",
       "position": "Contract Developer, team of two",
       "summary": "An interactive drawing experience between LA and NYC using C++, Cinder, and a custom UDP video streaming protocol over a mobile network for Toyota's #LetsJoinHands campaign",
-      "description": "For three days, in collaboration with Saatchi & Saatchi, Wildlife had a booth in Herald Square, New York, and XYZ, Los Angeles, an interactive experience for Toyota's campaign. Along with one other developer, I developed an application which connected two users across the country in real time. The application let users draw on the screen with their fingers while watching a live webcam feed of the other person. By combining the drawings on screen, it allowed them to draw together and encouraged them with prompts like \"Draw yourselves under the sea.\" and \"Draw yourselves on a perfect sunny day.\" The videos of drawing and webcam were combined together into a short clip which was posted on the @Toyota twitter feed. My favorite part was when a man with no arms came in and drew on the screen with his feet -- he was quite an impressive artist! \n\n Satchi & Satchi were so impressed with this project that they considered putting it up permanently in their offices.",
+      "description": "For three days, in collaboration with Saatchi & Saatchi, Wildlife had a booth in Herald Square, New York, and Hollywood and Highland, Los Angeles, for an interactive experience for Toyota's campaign. The experience connected two people across the country with webcams and a touchscreen they could draw on. The drawings were displayed on both screens along with prompts like \"Draw yourselves under the ocean.\" It was challenging to get everything working in a month, but worth it when seeing people engage in a truly meaningful experience! \n\n My favorite part was when a man with no arms came in and drew on the screen with his feet -- he was quite an impressive artist! The other highlights included little kids who were eager to draw on such a big screen, a man in a batman costume, and a Johnny Depp impersonator.",
       "video": { "source": "youtube", "id":"kRe7UnYbLy8" },
       "images": [
         { "source" : "cloudinary", "id": "crowd.jpg" },
@@ -25,8 +25,10 @@
       "link" : "https://aviv.nyc",
       "position": "Volunteer Developer",
       "summary": "A venue website with data pulled from the facebook graph API. The venue owners don't need to worry about updating another thing as they update facebook regularly. React front end, Haskell backend.",
-      "description": "",
-      "images" : [],
+      "description": "Aviv is my home-away-from-home, so this is probably the work of mine that I use the most. Built with [Sharon Wagner's](http://www.sharonlynnewagner.com/) incredible design, it gets a lot of love from frequent venue-goers for its simplicity and ease of use.",
+      "images" : [
+        { "source" : "cloudinary", "id": "Aviv.png" }
+      ],
       "tags": [
         "web",
         "mobile"
@@ -38,82 +40,46 @@
       "link" : "https://github.com/ulyssesp/oscillare",
       "position": "Sole Developer",
       "summary": "Live coding environment for video djing.",
-      "description": "",
+      "description": "Inspired by Tidal, this is my first forray into live coding, the practice of creating art in a performance using code. It's like the backend ([oschader-cinder](https://github.com/ulyssesp/oschader-cinder)) is the strings of a piano, and code snippets are the keys. By generalizing possible operations into two groups, outputs and inputs, and allowing almost any combination between the two types, an infinite number of unique visuals can be achieved. \n\n The system is built in an abstract way so that adding new visuals is easy. Because of this, Oschader-Cinder is my experimental ground for visual algorithms like flocking, smoke simulation, and math-based glsl shaders.",
       "images" : [],
+      "video": { "source": "youtube", "id": "6WTVgs6CYVQ"},
       "tags": [
         "interactive",
         "performance"
       ]
     },
     {
-      "name": "Trello Android",
-      "slug": "trello-android",
-      "link" : "https://play.google.com/store/apps/details?id=com.trello",
-      "position": "Developer, team of 3-4",
-      "summary": "A project management application. Featured numerous times on the Google Play store and received the Editor's Choice award.",
-      "description": "",
-      "images" : [],
-      "tags": [
-        "mobile"
-      ]
-    },
-    {
-      "name": "Trello Android Wear",
-      "slug": "trello-android-wear",
-      "link" : "http://blog.trello.com/trello-on-your-wrist/",
-      "position": "Sole Developer",
-      "summary": "One of the first apps available for Android Wear, built with the pre-release SDK.",
-      "description": "",
-      "images" : [],
-      "tags": [
-        "mobile"
-      ]
-    },
-    {
-      "name": "Trello Web",
-      "slug": "trello-web",
+      "name": "Trello Android and Web",
+      "slug": "trello",
+      "company": "Trello",
       "link" : "https://trello.com",
-      "position": "Developer, team of 3",
+      "position": "Developer",
       "summary": "A project management application with more than 10 million users.",
-      "description": "",
-      "images" : [],
+      "description": "Trello was the best place a recent NYU CS grad could end up. At Trello, engineers manage themselves, deciding what they work on and picking up projects based on interest and value to the company. While there I worked on two pre-release Android integrations, Android Wear and Google Nearby, and worked to move the web client from backbone to React.",
+      "video": { "source": "youtube", "id": "CzJqIbLe2Lg" },
+      "images" : [
+        { "source": "cloudinary", "id": "trello_wear.jpg" },
+        { "source": "cloudinary", "id": "android-material-screenshots.jpg" }
+      ],
       "tags": [
-        "web"
-      ]
-    },
-    {
-      "name": "Trello for Google Nearby",
-      "slug": "trello-nearby",
-      "position": "Sole Developer",
-      "summary": "Google Nearby integration for Trello that allows the user to easily add neaby users to a board.",
-      "description": "",
-      "images" : [],
-      "tags": [
+        "web",
         "mobile"
       ]
     },
     {
-      "name": "kimraebass.com",
-      "slug": "kimraebass",
-      "link" : "https://kimraebass.com",
-      "position": "Sole Developer",
-      "summary": "Website for Kim Bass, artist. In operation since 2006",
-      "description": "",
-      "images" : [],
+      "name": "Algobabez, Charlie Roberts, Scorpion Mouse, Omnikrll at Babycastles",
+      "slug": "algobabez-babycastles",
+      "link" : "https://github.com/ulyssesp/oscillare",
+      "position": "Visualist",
+      "summary": "Algorave at Babycastles",
+      "description": "This was my first live-code performance using oscillare, above. The evening went well, and it was a great experience to do visuals for such talented algorithmic musicians.",
+      "images" : [
+        { "source": "cloudinary", "id": "poster.jpg"}
+      ],
+      "video": { "source": "youtube", "id": "6WTVgs6CYVQ"},
       "tags": [
-        "web"
-      ]
-    },
-    {
-      "name": "AltahNet Health Tracker",
-      "slug": "altahnet",
-      "link" : "https://play.google.com/store/apps/details?id=net.altah.holistichealthtracker&hl=en",
-      "position": "Sole Developer",
-      "summary": "An Android health tracker for alternative healthcare provider AltahNet.",
-      "description": "",
-      "images" : [],
-      "tags": [
-        "mobile"
+        "interactive",
+        "performance"
       ]
     }
   ]

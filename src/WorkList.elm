@@ -64,7 +64,7 @@ view : Model -> Html Msg
 view model =
   div [class "row"]
     [ div [class "list-filter small-12 columns"]
-        [ ul [ class "menu" ] ([filterSelect "All" Nothing model.filter] ++ (List.map (tagSelect model.filter) [Interactive, Performance, Web, Mobile]))]
+        [ ul [ class "vertical medium-horizontal menu" ] ([filterSelect "All" Nothing model.filter] ++ (List.map (tagSelect model.filter) [Interactive, Performance, Web, Mobile]))]
     , div [class ""] (List.map viewWork model.displayList)
     ]
 
@@ -75,7 +75,7 @@ tagSelect cur tag =
 filterSelect : String -> Maybe Tag -> Maybe Tag -> Html Msg
 filterSelect str mt cur =
   li [class (if cur == mt then "active" else ""), onClick (Filter mt)]
-    [a [href "#", class "color-inherit text-decoration-none"] [text str]]
+    [a [class "color-inherit text-decoration-none"] [text str]]
 
 filterText : Tag -> String
 filterText tag =

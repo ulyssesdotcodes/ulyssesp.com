@@ -86,7 +86,7 @@ viewFull model =
   ++
   (withDefault [] <| map ((\x -> [x]) << viewVideo) model.work.video)
   ++
-  [viewImages model.imageLeft model.selectedImage <| toIndexedList model.images]
+  [viewImages model.imageLeft model.selectedImage model.images]
 
 viewLink : Work -> Html Msg
 viewLink model =
@@ -101,14 +101,19 @@ viewVideo vid =
         [ iframe [width 640, height 360, src ("https://www.youtube.com/embed/" ++ id)] []
         ]
 
-viewImages : Style.Animation -> Int -> List (Int, Image) -> Html Msg
+viewImages : Style.Animation -> Int -> Array Image -> Html Msg
 viewImages imageLeft selected images =
   div [class "gallery"]
-    [ div [class "left", onClick PrevImage] [i [class "fa fa-arrow-left"] []]
-    , div [class"right", onClick NextImage] [i [class "fa fa-arrow-right"] []]
-    , ul [style (Style.render imageLeft)]
-      (List.map (\indexedImage -> viewImage ((fst indexedImage) == selected) (snd indexedImage)) images)
+    (
+    (if length images > 1 then
+      [ div [class "left", onClick PrevImage] [i [class "fa fa-arrow-left"] []]
+      , div [class"right", onClick NextImage] [i [class "fa fa-arrow-right"] []]]
+    else [])
+    ++
+    [ ul [style (Style.render imageLeft)]
+      (List.map (\indexedImage -> viewImage ((fst indexedImage) == selected) (snd indexedImage)) <| toIndexedList images)
     ]
+    )
 
 
 viewImage : Bool -> Image -> Html Msg
