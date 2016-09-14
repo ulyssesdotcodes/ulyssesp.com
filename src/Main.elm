@@ -47,6 +47,7 @@ view model =
             ]
         ]
     , App.map ModifyList (WL.view model)
+    , div [class "footer"] [text "Copyright 2016 Ulysses Popple, created with ", a [href "http://elm-lang.org/", target "_blank"] [text "Elm"], text "."]
     ]
 
 icon : String -> String -> Html Msg

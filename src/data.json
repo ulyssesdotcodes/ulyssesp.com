@@ -25,7 +25,7 @@
       "link" : "https://aviv.nyc",
       "position": "Volunteer Developer",
       "summary": "A venue website with data pulled from the facebook graph API. The venue owners don't need to worry about updating another thing as they update facebook regularly. React front end, Haskell backend.",
-      "description": "Aviv is my home-away-from-home, so this is probably the work of mine that I use the most. Built with [Sharon Wagner's](http://www.sharonlynnewagner.com/) incredible design, it gets a lot of love from frequent venue-goers for its simplicity and ease of use.",
+      "description": "Aviv is my home-away-from-home, so this is probably the work of mine that I use the most. Built with [Sharon Wagner's](http://sharonlynnewagner.com/) incredible design, it gets a lot of love from frequent venue-goers for its simplicity and ease of use.",
       "images" : [
         { "source" : "cloudinary", "id": "Aviv.png" }
       ],
@@ -69,14 +69,28 @@
     {
       "name": "Algobabez, Charlie Roberts, Scorpion Mouse, Omnikrll at Babycastles",
       "slug": "algobabez-babycastles",
-      "link" : "https://github.com/ulyssesp/oscillare",
+      "link" : "https://facebook.com/events/960828910751408/",
       "position": "Visualist",
       "summary": "Algorave at Babycastles",
       "description": "This was my first live-code performance using oscillare, above. The evening went well, and it was a great experience to do visuals for such talented algorithmic musicians.",
       "images" : [
-        { "source": "cloudinary", "id": "poster.jpg"}
+        { "source": "cloudinary", "id": "poster.jpg" }
       ],
       "video": { "source": "youtube", "id": "6WTVgs6CYVQ"},
+      "tags": [
+        "interactive",
+        "performance"
+      ]
+    },
+    {
+      "name": "Olivia turns 25 Feat. Edith Pop & Wsabi Fox at Aviv",
+      "slug": "olivia-birthday",
+      "link" : "https://facebook.com/events/960828910751408/",
+      "position": "Visualist",
+      "summary": "Olivia's birthday party at Aviv.",
+      "description": "As a founding patron of Aviv, it was a great experience to do visuals for an owner's party. People from the DIY music scene came out to celebrate and listen to great music.",
+      "video": { "source": "youtube", "id": "vbP-jrwL6UI"},
+      "images": [],
       "tags": [
         "interactive",
         "performance"

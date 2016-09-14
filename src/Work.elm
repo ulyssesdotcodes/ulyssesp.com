@@ -9,7 +9,8 @@ import Html.Events exposing (onClick)
 import Json.Encode as Json
 import List
 import Markdown
-import Maybe exposing (withDefault, map, withDefault)
+import Maybe exposing (withDefault, map, withDefault, andThen, map2)
+import Regex exposing (..)
 import Style
 import Style.Properties exposing (..)
 import Style.Spring.Presets exposing (..)
@@ -90,8 +91,18 @@ viewFull model =
 
 viewLink : Work -> Html Msg
 viewLink model =
-  a [name model.slug, href ("#" ++ model.slug), class "work-item"] ([h3 [class "work-name inline"] [text (model.name ++ " ")]] ++
-           (withDefault [] (map (\l -> [h6 [class "inline"] [a [href l, target "_blank"] [text "[link]"]]]) model.link)))
+  let
+    findDomain l =
+      withDefault Nothing
+        <| get 1 << fromList << List.filter ((/=) (Just "s"))
+        <| withDefault []
+        <| map (\r -> r.submatches)
+        <| List.head
+        <| find (AtMost 1) (regex "(?:(^http(s?)://))([^/?#]+)(?:([/?#]|$))") l
+    findDomain' l = map2 (,) l (l `andThen` findDomain)
+  in
+    a [name model.slug, href ("#" ++ model.slug), class "work-item"] ([h3 [class "work-name inline"] [text (model.name ++ " ")]] ++
+            (withDefault [] (map (\l -> [h6 [class "inline"] [a [href (fst l), target "_blank"] [text ("[" ++ (snd l) ++ "]")]]]) (findDomain' model.link))))
 
 viewVideo : Video -> Html Msg
 viewVideo vid =

@@ -58,11 +58,15 @@ a h3 {
     margin-top: 0.8em;
 }
 
+.footer {
+    text-align: center;
+}
+
 // Image gallery
 .gallery {
     position: relative;
     overflow: hidden;
-    margin: 20px auto 0 auto;
+    margin: 20px auto 20px auto;
 
     ul {
         position: relative;
