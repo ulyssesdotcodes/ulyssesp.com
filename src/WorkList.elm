@@ -65,7 +65,7 @@ view model =
   div [class "row"]
     [ div [class "list-filter small-12 columns"]
         [ ul [ class "vertical medium-horizontal menu" ] ([filterSelect "All" Nothing model.filter] ++ (List.map (tagSelect model.filter) [Interactive, Performance, Web, Mobile]))]
-    , div [class ""] (List.map viewWork model.displayList)
+    , div [class "small-12"] (List.map viewWork model.displayList)
     ]
 
 tagSelect : Maybe Tag -> Tag -> Html Msg

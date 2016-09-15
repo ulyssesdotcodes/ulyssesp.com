@@ -34,14 +34,18 @@ view model =
     [ div [class ""]
         [ div [class "header"]
             [div [class "row"]
-               [ h1 [class "columns"] [text "Ulysses Popple"]
-               , h2 [class "shrink columns"]
-                 [ icon "github" "https://github.com/ulyssesp"
+               [ div [class "medium-6 small-12 name"]
+                   [ h1 [] [text "Ulysses Popple"]
+                   , a [class "email", href "mailto:ulysses.popple@gmail.com"] [text "ulysses.popple@gmail.com"]
+                   ]
+               , h2 [class "social medium-6 small-12 align-self-top"]
+                 [ icon "linkedin" "https://www.linkedin.com/in/ulysses-popple-98649a33"
+                 , icon "github" "https://github.com/ulyssesp"
                  , icon "youtube-play" "https://www.youtube.com/c/UlyssesPopple"
                  ]
                ]
             , div [class "row"]
-                [div [class "small-12 columns"] [text "I architect pixels with planning, some computing power, and a small bit of finger movement."]]
+                [div [class "small-12 columns"] [text "I architect pixels with planning, a small bit of finger movement, and some computing power."]]
             , div [class "row"]
               [div [class "small-12 columns"] [text "Below are a selection of projects and performances that I enjoyed working on, and some text about what I enjoyed about them."]]
             ]
@@ -52,7 +56,7 @@ view model =
 
 icon : String -> String -> Html Msg
 icon icon link =
-  a [href link, target "_blank", class "pl2 color-inherit"] [i [class ("fa fa-" ++ icon)] []]
+  a [href link, target "_blank", class "columns pl2 color-inherit"] [i [class ("fa fa-" ++ icon)] []]
 
 -- UPDATE
 

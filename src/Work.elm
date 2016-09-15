@@ -63,25 +63,31 @@ view model =
   let
     mainView =
       case model.displayType of
-        Mini -> viewMini model.work
+        Mini -> viewMini model
         Full -> viewFull model
     nextDisplay =
       case model.displayType of
         Mini -> a [href ("#" ++ model.work.slug), onClick (DisplayAs Full)] [text "Show more"]
         Full -> a [href ("#" ++ model.work.slug), onClick (DisplayAs Mini)] [text "Show less"]
   in
-    div [class "row align-center"] [div [class "small-10 columns"] (mainView ++ [ p [] [nextDisplay] ]) ]
+    div [class "row align-center"] [div [class "small-10"] (mainView ++ [ p [] [nextDisplay] ]) ]
 
-viewMini : Work -> List (Html Msg)
+reverseDisplay : DisplayType -> DisplayType
+reverseDisplay d =
+  case d of
+    Mini -> Full
+    Full -> Mini
+
+viewMini : Model -> List (Html Msg)
 viewMini model =
   [ viewLink model
-  , p [] [ text (withDefault "Personal" (map ((++) "Company: ") model.company))]
-  , Markdown.toHtml [] model.summary
+  , p [] [ text (withDefault "Personal" (map ((++) "Company: ") model.work.company))]
+  , Markdown.toHtml [] model.work.summary
   ]
 
 viewFull : Model -> List (Html Msg)
 viewFull model =
-  (viewMini model.work) ++
+  (viewMini model) ++
   [ Markdown.toHtml [] model.work.description
   ]
   ++
@@ -89,8 +95,8 @@ viewFull model =
   ++
   [viewImages model.imageLeft model.selectedImage model.images]
 
-viewLink : Work -> Html Msg
-viewLink model =
+viewLink : Model -> Html Msg
+viewLink { work, displayType } =
   let
     findDomain l =
       withDefault Nothing
@@ -101,24 +107,23 @@ viewLink model =
         <| find (AtMost 1) (regex "(?:(^http(s?)://))([^/?#]+)(?:([/?#]|$))") l
     findDomain' l = map2 (,) l (l `andThen` findDomain)
   in
-    a [name model.slug, href ("#" ++ model.slug), class "work-item"] ([h3 [class "work-name inline"] [text (model.name ++ " ")]] ++
-            (withDefault [] (map (\l -> [h6 [class "inline"] [a [href (fst l), target "_blank"] [text ("[" ++ (snd l) ++ "]")]]]) (findDomain' model.link))))
+    a [name work.slug, href ("#" ++ work.slug), class "work-item", onClick (DisplayAs (reverseDisplay displayType))] ([h3 [class "work-name inline"] [text (work.name ++ " ")]] ++
+            (withDefault [] (map (\l -> [h6 [class "inline"] [a [href (fst l), target "_blank"] [text ("[" ++ (snd l) ++ "]")]]]) (findDomain' work.link))))
 
 viewVideo : Video -> Html Msg
 viewVideo vid =
   case vid of
     (Youtube id) ->
       div [class "media flex-video"]
-        [ iframe [width 640, height 360, src ("https://www.youtube.com/embed/" ++ id)] []
-        ]
+        [ iframe [src ("https://www.youtube.com/embed/" ++ id)] []]
 
 viewImages : Style.Animation -> Int -> Array Image -> Html Msg
 viewImages imageLeft selected images =
   div [class "gallery"]
     (
     (if length images > 1 then
-      [ div [class "left", onClick PrevImage] [i [class "fa fa-arrow-left"] []]
-      , div [class"right", onClick NextImage] [i [class "fa fa-arrow-right"] []]]
+      [ div [class "control left", onClick PrevImage] [i [class "fa fa-arrow-left"] []]
+      , div [class "control right", onClick NextImage] [i [class "fa fa-arrow-right"] []]]
     else [])
     ++
     [ ul [style (Style.render imageLeft)]
@@ -133,7 +138,6 @@ viewImage active media =
     (Cloudinary slug id) ->
       li [] [img [ class (if active then "is-active" else "")
                  , src ("http://res.cloudinary.com/dezngnedw/image/upload/c_fit,h_375,w_666/v1472550364/ulyssesp.com/" ++ slug ++ "/" ++ id)
-                 , onClick NextImage
              ] []
         ]
 
