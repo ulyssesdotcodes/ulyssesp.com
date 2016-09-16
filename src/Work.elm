@@ -67,8 +67,8 @@ view model =
         Full -> viewFull model
     nextDisplay =
       case model.displayType of
-        Mini -> a [href ("#" ++ model.work.slug), onClick (DisplayAs Full)] [text "Show more"]
-        Full -> a [href ("#" ++ model.work.slug), onClick (DisplayAs Mini)] [text "Show less"]
+        Mini -> a [class "change-display", href ("#" ++ model.work.slug), onClick (DisplayAs Full)] [text "Show more"]
+        Full -> a [class "change-display", href ("#" ++ model.work.slug), onClick (DisplayAs Mini)] [text "Show less"]
   in
     div [class "row align-center"] [div [class "small-10"] (mainView ++ [ p [] [nextDisplay] ]) ]
 
@@ -108,7 +108,7 @@ viewLink { work, displayType } =
     findDomain' l = map2 (,) l (l `andThen` findDomain)
   in
     a [name work.slug, href ("#" ++ work.slug), class "work-item", onClick (DisplayAs (reverseDisplay displayType))] ([h3 [class "work-name inline"] [text (work.name ++ " ")]] ++
-            (withDefault [] (map (\l -> [h6 [class "inline"] [a [href (fst l), target "_blank"] [text ("[" ++ (snd l) ++ "]")]]]) (findDomain' work.link))))
+            (withDefault [] (map (\l -> [h6 [class "work-link inline"] [a [href (fst l), target "_blank"] [text ("[" ++ (snd l) ++ "]")]]]) (findDomain' work.link))))
 
 viewVideo : Video -> Html Msg
 viewVideo vid =

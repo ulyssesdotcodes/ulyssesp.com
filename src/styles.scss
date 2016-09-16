@@ -24,7 +24,37 @@ a h3 {
 
 .work-item {
     display: block;
-    padding-bottom: 1.2em; 
+    padding-bottom: 1.2em;
+}
+
+@keyframes bob {
+    0% {  transform: translateY(-0px); }
+    50% {  transform: translateY(-4px); }
+    100% { transform: translateY(-0px); }
+}
+
+.work-link a {
+    color: map-get($foundation-palette, secondary);
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.change-display {
+    display: block;
+    color: map-get($foundation-palette, tertiary);
+
+	  &:hover, &:focus, &:active {
+        animation-name: bob;
+        animation-duration: 1.5s;
+        animation-delay: 0s;
+        animation-iteration-count: infinite;
+        -webkit-animation-iteration-count: infinite;
+        animation-timing-function: ease-in-out;
+        animation-fill-mode: forwards;
+        animation-direction: alternate;
+	  }
 }
 
 .inline {
