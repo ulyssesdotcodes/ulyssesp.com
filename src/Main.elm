@@ -34,7 +34,7 @@ view model =
     [ div [class ""]
         [ div [class "header"]
             [div [class "row"]
-               [ div [class "medium-6 small-12 name"]
+               [ div [class "medium-6 small-12 name column align-self-middle"]
                    [ h1 [] [text "Ulysses Popple"]
                    , a [class "email", href "mailto:ulysses.popple@gmail.com"] [text "ulysses.popple@gmail.com"]
                    ]
