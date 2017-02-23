@@ -7,9 +7,8 @@ module.exports = {
       './src/index.js'
     ],
     "vendor": [
-      "!!script!jquery/dist/jquery.min.js",
-      "!!script!foundation-sites/dist/foundation.min.js",
-      "!!script!motion-ui/dist/motion-ui.min.js"
+      "!!script-loader!jquery/dist/jquery.min.js",
+      "!!script-loader!motion-ui/dist/motion-ui.min.js",
     ]
   },
 
@@ -27,17 +26,20 @@ module.exports = {
         loaders: [
           'style-loader',
           'css-loader',
+          'script-loader',
+          'file-loader',
+          'less-loader'
         ]
       },
       {
         test:    /\.html$/,
         exclude: /node_modules/,
-        loader:  'file?name=[name].[ext]',
+        loader:  'file-loader?name=[name].[ext]',
       },
       {
         test:    /\.elm$/,
         exclude: [/elm-stuff/, /node_modules/],
-        loader:  'elm-webpack',
+        loader:  'elm-webpack-loader',
       },
       {
         test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
@@ -50,9 +52,6 @@ module.exports = {
     ],
 
     noParse: /\.elm$/,
-  },
-  sassLoader: {
-    includePaths: [path.resolve(__dirname, "node_modules")]
   },
   devServer: {
     inline: true,

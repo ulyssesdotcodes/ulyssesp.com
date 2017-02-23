@@ -2,9 +2,8 @@ module Main exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (class, target, href)
-import Html.App as App
 import Http
-import Json.Decode as Json exposing ((:=))
+import Json.Decode as Json exposing (field)
 import Task exposing (..)
 
 import Model exposing (..)
@@ -22,8 +21,7 @@ init =
 -- MESSAGES
 type Msg
   = NoOp
-  | FetchFail Http.Error
-  | FetchSucceed (List Work)
+  | FetchResult (Result Http.Error (List Work))
   | FetchData
   | ModifyList WL.Msg
 
@@ -50,7 +48,7 @@ view model =
               [div [class "small-12 columns"] [text "Below are a selection of projects and performances that I enjoyed working on, and some text about what I enjoyed about them."]]
             ]
         ]
-    , App.map ModifyList (WL.view model)
+    , Html.map ModifyList (WL.view model)
     , div [class "footer"] [text "Copyright 2016 Ulysses Popple, created with ", a [href "http://elm-lang.org/", target "_blank"] [text "Elm"], text "."]
     ]
 
@@ -65,12 +63,12 @@ update msg model =
   case msg of
     NoOp ->
       (model, Cmd.none)
-    FetchFail err ->
+    FetchResult (Err err) ->
       let
         x = Debug.log "err" err
       in
         (model, Cmd.none)
-    FetchSucceed data ->
+    FetchResult (Ok data) ->
       let
         x = Debug.log "test" data
       in
@@ -89,9 +87,9 @@ subscriptions model =
   Sub.map ModifyList <| WL.subscriptions model
 
 -- MAIN
-main : Program Never
+main : Program Never Model Msg
 main =
-  App.program
+  program
     { init = init
     , view = view
     , update = update
@@ -100,6 +98,6 @@ main =
 
 fetchData : Cmd Msg
 fetchData =
-  Task.perform FetchFail FetchSucceed (Http.get workDecoder ("./data.json"))
+  Http.send FetchResult (Http.get "./data.json" workDecoder)
 
 

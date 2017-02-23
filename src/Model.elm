@@ -36,13 +36,13 @@ imageDecoder slug =
         "cloudinary" -> succeed <| Cloudinary slug jm.id
         _ -> fail "could not decode image type"
   in
-    decodeJsonMedia `andThen` toImage
+    andThen toImage decodeJsonMedia
 
 decodeJsonMedia : Decoder JsonMedia
 decodeJsonMedia =
-  object2 JsonMedia
-    ("source" := string)
-    ("id" := string)
+  map2 JsonMedia
+    (field "source" string)
+    (field "id" string)
 
 videoDecoder : Decoder Video
 videoDecoder =
@@ -52,7 +52,7 @@ videoDecoder =
         "youtube" -> succeed <| Youtube jm.id
         _ -> fail "could not decode video type"
   in
-    decodeJsonMedia `andThen` toVideo
+    andThen toVideo decodeJsonMedia
 
 type alias Work =
   { tags : List Tag
@@ -66,22 +66,22 @@ type alias Work =
   , slug : String
   }
 
-apply : Decoder (a -> b) -> Decoder a -> Decoder b
+apply : Decoder a -> Decoder (a -> b) -> Decoder b
 apply =
-  object2 (<|)
+  map2 (|>)
 
 workDecoder : Decoder (List Work)
 workDecoder =
   let work =
-        map Work ("tags" := list (string `andThen` tagDecoder))
-          `apply` ("name" := string)
-          `apply` (maybe ("link" := string))
-          `apply` (maybe ("company" := string))
-          `apply` ("summary" := string)
-          `apply` ("description" := string)
-          `apply` (maybe ("video" := videoDecoder))
-          `apply` (("slug" := string) `andThen` (\slug -> "images" := list (imageDecoder slug)))
-          `apply` ("slug" := string)
+        map Work (field "tags" (list (andThen tagDecoder string)))
+          |> apply (field "name" string)
+          |> apply (maybe (field "link" string))
+          |> apply (maybe (field "company" string))
+          |> apply (field "summary" string)
+          |> apply (field "description" string)
+          |> apply (maybe (field "video" videoDecoder))
+          |> apply (andThen (\slug -> field "images" (list (imageDecoder slug))) (field "slug" string))
+          |> apply (field "slug" string)
   in
-    "work" := list work
+    field "work" (list work)
 

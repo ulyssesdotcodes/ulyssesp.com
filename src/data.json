@@ -1,10 +1,35 @@
 {
   "work": [
     {
+      "name": "NBA Crunch Time with SAP",
+      "slug": "crunchtime",
+      "company": "Wildlife, Momentum, NBA",
+      "position": "Contract Developer",
+      "summary": "An interactive kinect experience where users would coach a basketball team at crunch time. Also adapted for tablets.",
+      "description": "The NBA and SAP wanted to highlight stats in an innovative way at the NBA Commissioner's Tech Summit. To do this we created an interactive experience where the user was presented footage of a play followed by three options of which call to make next. They used the stats to decide on a play and then pointed to the screen to select it and play it. The interaction was powered by Touchdesigner and Kinect. The NBA also requested a tablet experience to be playable while executives waiting for meetings. We adapted the interactive experience to use multitouch and installed it on Surface Pro tablets.",
+      "images": [],
+      "tags": [
+        "interactive"
+      ]
+    },
+    {
+      "name": "Ringly Android App",
+      "slug": "ringly",
+      "link" : "https://play.google.com/store/apps/details?id=com.ringly.ringly",
+      "company": "Ringly",
+      "position": "Contract Developer",
+      "summary": "The Android app for Ringly's smart jewelry. My role was to redesign the app using Material Design principles and add in step tracking capabilities.",
+      "description": "Working closely with the hardware team and Ringly's on-site designer, I updated the app to reflect modern Android approaches. Material Design components and principles are now front and center in the app design and architecture. To add step tracking capabilties, I updated the codebase to use modern RxJava and RxAndroid libraries and worked with the hardware team to ensure compatibilty with Android's bluetooth system.",
+      "images": [],
+      "tags": [
+        "mobile"
+      ]
+    },
+    {
       "name": "#LetsJoinHands",
       "slug": "lets-join-hands",
-      "link" : "https://twitter.com/search?f=videos&vertical=default&q=%40Toyota%20%23LetsJoinHands&src=typd",
-      "company": "Wildlife",
+      "link" : "http://wildlife.la/letsjoinhands",
+      "company": "Wildlife, Saatchi & Saatchi, Toyota",
       "position": "Contract Developer, team of two",
       "summary": "An interactive drawing experience between LA and NYC using C++, Cinder, and a custom UDP video streaming protocol over a mobile network for Toyota's #LetsJoinHands campaign",
       "description": "For three days, in collaboration with Saatchi & Saatchi, Wildlife had a booth in Herald Square, New York, and Hollywood and Highland, Los Angeles, for an interactive experience for Toyota's campaign. The experience connected two people across the country with webcams and a touchscreen they could draw on. The drawings were displayed on both screens along with prompts like \"Draw yourselves under the ocean.\" It was challenging to get everything working in a month, but worth it when seeing people engage in a truly meaningful experience! \n\n My favorite part was when a man with no arms came in and drew on the screen with his feet -- he was quite an impressive artist! The other highlights included little kids who were eager to draw on such a big screen, a man in a batman costume, and a Johnny Depp impersonator.",
@@ -83,7 +108,7 @@
       ]
     },
     {
-      "name": "Olivia turns 25 Feat. Edith Pop & Wsabi Fox at Aviv",
+      "name": "Olivia turns 25 Feat. Edith Pop & Wsabi Fox at Aviv.",
       "slug": "olivia-birthday",
       "link" : "https://facebook.com/events/960828910751408/",
       "position": "Visualist",

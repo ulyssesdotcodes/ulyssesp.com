@@ -1,6 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Anonymous+Pro|Roboto);
 @import 'settings';
-@import 'foundation';
 
 html {
     overflow-y: scroll;
@@ -34,7 +33,6 @@ a h3 {
 }
 
 .work-link a {
-    color: map-get($foundation-palette, secondary);
 
     &:hover {
         text-decoration: underline;
@@ -43,7 +41,6 @@ a h3 {
 
 .change-display {
     display: block;
-    color: map-get($foundation-palette, tertiary);
 
 	  &:hover, &:focus, &:active {
         animation-name: bob;

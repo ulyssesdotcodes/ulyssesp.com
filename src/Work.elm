@@ -1,5 +1,6 @@
 module Work exposing (Model, Msg, init, update, view, subscriptions)
 
+import Animation
 import AnimationFrame
 import Time exposing (second)
 import Array exposing(Array, length, get, fromList, toIndexedList)
@@ -10,10 +11,8 @@ import Json.Encode as Json
 import List
 import Markdown
 import Maybe exposing (withDefault, map, withDefault, andThen, map2)
+import Tuple
 import Regex exposing (..)
-import Style
-import Style.Properties exposing (..)
-import Style.Spring.Presets exposing (..)
 
 import Model exposing (..)
 
@@ -24,11 +23,11 @@ type alias Model =
   , displayType : DisplayType
   , selectedImage : Int
   , images : Array Image
-  , imageLeft : Style.Animation
+  , imageLeft : Animation.State
   }
 
 init : Work -> Model
-init w = Model w Mini 0 (fromList w.images) (Style.init [Left 0.0 Px])
+init w = Model w Mini 0 (fromList w.images) (Animation.style [Animation.left (Animation.px 0.0)])
 
 type Msg
   = DisplayAs DisplayType
@@ -42,20 +41,20 @@ update msg m =
     (DisplayAs t) ->
       { m | displayType = t }
 
-    NextImage ->
-      let
-        si' = (m.selectedImage + 1) % (length m.images)
-      in
-        { m | selectedImage = si', imageLeft = Style.animate |> Style.duration second |> Style.spring wobbly |> Style.to [Left (toFloat (si' * -660)) Px] |> Style.on m.imageLeft }
+    NextImage -> m
+      -- let
+      --   sip = (m.selectedImage + 1) % (length m.images)
+      -- in
+      --   { m | selectedImage = sip, imageLeft = Animation.update |> Animation.duration second |> Animation.spring wobbly |> Animation.to [Left (toFloat (sip * -660)) Px] |> Animation.on m.imageLeft }
 
-    PrevImage ->
-      let
-        si' = (m.selectedImage - 1) % (length m.images)
-      in
-        { m | selectedImage = si', imageLeft = Style.animate |> Style.duration second |> Style.spring wobbly |> Style.to [Left (toFloat (si' * -660)) Px] |> Style.on m.imageLeft }
+    PrevImage -> m
+      -- let
+      --   sip = (m.selectedImage - 1) % (length m.images)
+      -- in
+      --   { m | selectedImage = sip, imageLeft = Animation.animate |> Animation.duration second |> Animation.spring wobbly |> Animation.to [Left (toFloat (sip * -660)) Px] |> Animation.on m.imageLeft }
 
-    Animate t ->
-      { m | imageLeft = Style.tick t m.imageLeft }
+    Animate t -> m
+      -- { m | imageLeft = Animation.tick t m.imageLeft }
 
 
 view : Model -> Html Msg
@@ -81,7 +80,7 @@ reverseDisplay d =
 viewMini : Model -> List (Html Msg)
 viewMini model =
   [ viewLink model
-  , p [] [ text (withDefault "Personal" (map ((++) "Company: ") model.work.company))]
+  , p [] [ text (withDefault "Personal" (Maybe.map ((++) "Company: ") model.work.company))]
   , Markdown.toHtml [] model.work.summary
   ]
 
@@ -91,7 +90,7 @@ viewFull model =
   [ Markdown.toHtml [] model.work.description
   ]
   ++
-  (withDefault [] <| map ((\x -> [x]) << viewVideo) model.work.video)
+  (withDefault [] <| Maybe.map ((\x -> [x]) << viewVideo) model.work.video)
   ++
   [viewImages model.imageLeft model.selectedImage model.images]
 
@@ -102,13 +101,13 @@ viewLink { work, displayType } =
       withDefault Nothing
         <| get 1 << fromList << List.filter ((/=) (Just "s"))
         <| withDefault []
-        <| map (\r -> r.submatches)
+        <| Maybe.map (\r -> r.submatches)
         <| List.head
         <| find (AtMost 1) (regex "(?:(^http(s?)://))([^/?#]+)(?:([/?#]|$))") l
-    findDomain' l = map2 (,) l (l `andThen` findDomain)
+    findDomainp l = map2 (,) l (andThen findDomain l)
   in
     a [name work.slug, href ("#" ++ work.slug), class "work-item", onClick (DisplayAs (reverseDisplay displayType))] ([h3 [class "work-name inline"] [text (work.name ++ " ")]] ++
-            (withDefault [] (map (\l -> [h6 [class "work-link inline"] [a [href (fst l), target "_blank"] [text ("[" ++ (snd l) ++ "]")]]]) (findDomain' work.link))))
+            (withDefault [] (Maybe.map (\l -> [h6 [class "work-link inline"] [a [href (Tuple.first l), target "_blank"] [text ("[" ++ (Tuple.second l) ++ "]")]]]) (findDomainp work.link))))
 
 viewVideo : Video -> Html Msg
 viewVideo vid =
@@ -117,7 +116,7 @@ viewVideo vid =
       div [class "media flex-video"]
         [ iframe [src ("https://www.youtube.com/embed/" ++ id)] []]
 
-viewImages : Style.Animation -> Int -> Array Image -> Html Msg
+viewImages : Animation.State -> Int -> Array Image -> Html Msg
 viewImages imageLeft selected images =
   div [class "gallery"]
     (
@@ -126,8 +125,8 @@ viewImages imageLeft selected images =
       , div [class "control right", onClick NextImage] [i [class "fa fa-arrow-right"] []]]
     else [])
     ++
-    [ ul [style (Style.render imageLeft)]
-      (List.map (\indexedImage -> viewImage ((fst indexedImage) == selected) (snd indexedImage)) <| toIndexedList images)
+    [ ul (Animation.render imageLeft)
+        (List.map (\indexedImage -> viewImage ((Tuple.first indexedImage) == selected) (Tuple.second indexedImage)) <| toIndexedList images)
     ]
     )
 

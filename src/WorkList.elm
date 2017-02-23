@@ -1,11 +1,9 @@
 module WorkList exposing (Model, Msg, init, update, view, newData, subscriptions)
 
 import Html exposing (..)
-import Html.App as App
 import Html.Attributes exposing (..)
 import Html.Events exposing (onClick)
-import Lazy.List exposing (fromList, toList, zip, numbers)
-import List exposing (map)
+import List exposing (map, map2, range, length)
 
 import Model exposing (..)
 import Work as W
@@ -18,11 +16,11 @@ type alias Model =
 
 init : List Work -> Model
 init ws =
-  Model ws (indexModels (map W.init ws)) Nothing
+  Model ws (indexModels (List.map W.init ws)) Nothing
 
 indexModels : List W.Model -> List (Int, W.Model)
 indexModels ws =
-   toList <| (zip numbers) <| fromList ws
+   map2 (,) (range 0 (length ws)) ws
 
 
 type Msg
@@ -47,17 +45,17 @@ update msg model =
     Filter tag ->
       case tag of
         Just t ->
-          { model | filter = tag, displayList = (indexModels << map W.init) (List.filter (\w -> List.member t w.tags) model.dataList) }
+          { model | filter = tag, displayList = (indexModels << List.map W.init) (List.filter (\w -> List.member t w.tags) model.dataList) }
 
         Nothing ->
-          { model | filter = tag, displayList = (indexModels << map W.init) (model.dataList) }
+          { model | filter = tag, displayList = (indexModels << List.map W.init) (model.dataList) }
 
     NoOp ->
       model
 
 updateHelp : Int -> W.Msg -> (Int, W.Model) -> (Int, W.Model)
-updateHelp id msg (id', model) =
-  (id', if id == id' then W.update msg model else model)
+updateHelp id msg (idp, model) =
+  (idp, if id == idp then W.update msg model else model)
 
 
 view : Model -> Html Msg
@@ -87,7 +85,7 @@ filterText tag =
 
 viewWork : (Int, W.Model) -> Html Msg
 viewWork (id, model) =
-  App.map (Modify id) (W.view model)
+  Html.map (Modify id) (W.view model)
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
@@ -95,4 +93,4 @@ subscriptions model =
     mapWork (i, w) =
       Sub.map (Modify i) <| W.subscriptions w
   in
-    Sub.batch <| map mapWork model.displayList
+    Sub.batch <| List.map mapWork model.displayList

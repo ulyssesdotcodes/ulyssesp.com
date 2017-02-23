@@ -1,9 +1,10 @@
 'use strict';
 
-// import 'foundation-sites/dist/foundation-flex.min.css';
-require("font-awesome-webpack");
+//import 'foundation-sites/dist/foundation-flex.min.css';
+// require("font-awesome-webpack");
+// require('style-loader!css-loader!less-loader!font-awesome-webpack/font-awesome-styles.loader!font-awesome-webpack/font-awesome.config.js');
 
-require("!style!css!sass!./styles.scss");
+require("!style-loader!css-loader!sass-loader!./styles.scss");
 
 // Require index.html so it gets copied to dist
 require('./index.html');
