@@ -16,7 +16,7 @@ type alias Model =
 
 init : List Work -> Model
 init ws =
-  Model ws (indexModels (List.map W.init ws)) Nothing
+  Model ws (indexModels (List.map (W.init W.Mini) ws)) Nothing
 
 indexModels : List W.Model -> List (Int, W.Model)
 indexModels ws =
@@ -45,10 +45,10 @@ update msg model =
     Filter tag ->
       case tag of
         Just t ->
-          { model | filter = tag, displayList = (indexModels << List.map W.init) (List.filter (\w -> List.member t w.tags) model.dataList) }
+          { model | filter = tag, displayList = (indexModels << List.map (W.init W.Mini)) (List.filter (\w -> List.member t w.tags) model.dataList) }
 
         Nothing ->
-          { model | filter = tag, displayList = (indexModels << List.map W.init) (model.dataList) }
+          { model | filter = tag, displayList = (indexModels << List.map (W.init W.Mini)) (model.dataList) }
 
     NoOp ->
       model

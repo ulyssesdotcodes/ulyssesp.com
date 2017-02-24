@@ -14,16 +14,16 @@ import Work as W
 
 -- MODEL
 
-type DisplayType = List | Single String
+type Content = ContentList WL.Model | ContentSingle W.Model
 
 type alias Model =
-  { worklist: WL.Model
-  , displayType : DisplayType
+  { data : List Work
+  , content : Content
   }
 
 init : Navigation.Location -> (Model, Cmd Msg)
 init loc =
-  ( Model (WL.init []) List, fetchData )
+  ( Model [] (ContentList <| WL.init []), fetchData )
 
 
 -- MESSAGES
@@ -32,13 +32,14 @@ type Msg
   | FetchResult (Result Http.Error (List Work))
   | FetchData
   | ModifyList WL.Msg
+  | ModifyWork W.Msg
   | UrlChange Navigation.Location
 
 -- VIEW
 view : Model -> Html Msg
-view { worklist, displayType } =
-  case displayType of
-    List ->
+view { data, content } =
+  case content of
+    ContentList worklist ->
       div [class ""]
         [ div [class "container"]
           [ div [class "row header"]
@@ -59,7 +60,7 @@ view { worklist, displayType } =
         , div [class "footer"] [text "Copyright 2016 Ulysses Popple, created with ", a [href "http://elm-lang.org/", target "_blank"] [text "Elm"], text "."]
         ]
 
-    Single id ->
+    ContentSingle work ->
       div [class ""]
         [ div [class "container"]
           [ div [class "row header"]
@@ -74,10 +75,9 @@ view { worklist, displayType } =
                   ]
               ]
           ]
-        , text (toString id)
+        , div [class "container"] [ Html.map ModifyWork (W.view work) ]
         , div [class "footer"] [text "Copyright 2016 Ulysses Popple, created with ", a [href "http://elm-lang.org/", target "_blank"] [text "Elm"], text "."]
         ]
-
 
 icon : String -> String -> Html Msg
 icon icon link =
@@ -96,36 +96,68 @@ update msg model =
         x = Debug.log "err" err
       in
         (model, Cmd.none)
-    FetchResult (Ok data) ->
+
+    FetchResult (Ok result) ->
       let
-        {worklist, displayType} = model
+        { data, content } = model
       in
-        (Model (WL.newData data worklist) displayType, Cmd.none)
+        case content of
+          (ContentList wl) ->
+            ({ model | content = (ContentList <| WL.newData result wl), data = result }, Cmd.none)
+
+          (ContentSingle w) ->
+            ({ model | data = result }, Cmd.none)
+
     FetchData ->
       (model, fetchData)
 
     ModifyList msg ->
-      ({ model | worklist = WL.update msg model.worklist }, Cmd.none)
+      let
+        { data, content } = model
+      in
+        case content of
+          (ContentList wl) ->
+            ({ model | content = ContentList <| WL.update msg wl }, Cmd.none)
+
+          (ContentSingle w) ->
+            (model, Cmd.none)
+
+
+    ModifyWork msg ->
+      let
+        { data, content } = model
+      in
+        case content of
+          (ContentList wl) ->
+            (model, Cmd.none)
+
+          (ContentSingle w) ->
+            ({ model | content = ContentSingle w }, Cmd.none)
+
 
     UrlChange loc ->
       let
-        x = Debug.log "loc" loc
-        mid = parseHash (UrlParser.s "posts" </> string) loc
-        y = Debug.log "mid" mid
+        mid = parseHash (UrlParser.s "work" </> string) loc
+        mwork = mid |> Maybe.andThen (\id -> Maybe.map (W.init W.Full) (List.head <| List.filter ((==) id << .slug) model.data))
       in
-        case mid of
-          (Just id) ->
-            (Model model.worklist (Single id), Cmd.none)
+        case mwork of
+          (Just work) ->
+            (Model model.data (ContentSingle work), Cmd.none)
 
           Nothing ->
-            (Model (WL.init model.worklist.dataList) List, Cmd.none)
+            ({ model | content = (ContentList <| WL.init model.data) }, Cmd.none)
 
 
 
 -- SUBSCRIPTIONS
 subscriptions : Model -> Sub Msg
-subscriptions { worklist } =
-  Sub.map ModifyList <| WL.subscriptions worklist
+subscriptions { data, content } =
+  case content of
+    (ContentList wl) ->
+      Sub.map ModifyList <| WL.subscriptions wl
+
+    (ContentSingle w) ->
+      Sub.map ModifyWork <| W.subscriptions w
 
 -- MAIN
 main : Program Never Model Msg

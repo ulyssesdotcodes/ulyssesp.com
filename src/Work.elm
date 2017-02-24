@@ -26,8 +26,8 @@ type alias Model =
   , imageLeft : Animation.State
   }
 
-init : Work -> Model
-init w = Model w Mini 0 (fromList w.images) (Animation.style [Animation.left (Animation.px 0.0)])
+init : DisplayType -> Work -> Model
+init dt w = Model w dt 0 (fromList w.images) (Animation.style [Animation.left (Animation.px 0.0)])
 
 type Msg
   = DisplayAs DisplayType
@@ -106,7 +106,7 @@ viewLink { work, displayType } =
         <| find (AtMost 1) (regex "(?:(^https?://))([^/?#]+)(?:([/?#]|$))") l
     findDomainp l = map2 (,) l (andThen findDomain l)
   in
-    a [name work.slug, href ("#posts/" ++ work.slug), class "work-item"] ([h3 [class "work-name inline"] [text (work.name ++ " ")]] ++
+    a [name work.slug, href ("#work/" ++ work.slug), class "work-item"] ([h3 [class "work-name inline"] [text (work.name ++ " ")]] ++
             (withDefault [] (Maybe.map (\l -> [h6 [class "work-link inline"] [a [href (Tuple.first l), target "_blank"] [text ("[" ++ (Tuple.second l) ++ "]")]]]) (findDomainp work.link))))
 
 viewVideo : Video -> Html Msg
