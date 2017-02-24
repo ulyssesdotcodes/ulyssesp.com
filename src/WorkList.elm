@@ -1,4 +1,4 @@
-module WorkList exposing (Model, Msg, init, update, view, newData, subscriptions)
+module WorkList exposing (Model, Msg (..), init, update, view, newData, subscriptions)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
