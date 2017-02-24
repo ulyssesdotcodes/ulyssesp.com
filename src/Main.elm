@@ -28,33 +28,27 @@ type Msg
 -- VIEW
 view : Model -> Html Msg
 view model =
-  div []
-    [ div [class ""]
-        [ div [class "header"]
-            [div [class "row"]
-               [ div [class "medium-6 small-12 name column align-self-middle"]
-                   [ h1 [] [text "Ulysses Popple"]
-                   , a [class "email", href "mailto:ulysses.popple@gmail.com"] [text "ulysses.popple@gmail.com"]
-                   ]
-               , h2 [class "social medium-6 small-12 align-self-top"]
-                 [ icon "linkedin" "https://www.linkedin.com/in/ulysses-popple-98649a33"
-                 , icon "github" "https://github.com/ulyssesp"
-                 , icon "youtube-play" "https://www.youtube.com/c/UlyssesPopple"
-                 ]
-               ]
-            , div [class "row"]
-                [div [class "small-12 columns"] [text "I architect pixels with planning, a small bit of finger movement, and some computing power."]]
-            , div [class "row"]
-              [div [class "small-12 columns"] [text "Below are a selection of projects and performances that I enjoyed working on, and some text about what I enjoyed about them."]]
-            ]
-        ]
+  div [class "container"]
+    [ div [class "container"]
+      [ div [class "row header"]
+          [ div [class "nine columns"]
+              [ h1 [] [text "Ulysses Popple"]
+              , a [class "email", href "mailto:ulysses.popple@gmail.com"] [text "ulysses.popple@gmail.com"]
+              ]
+          , icon "linkedin" "https://www.linkedin.com/in/ulysses-popple-98649a33"
+          , icon "github" "https://github.com/ulyssesp"
+          , icon "youtube" "https://www.youtube.com/c/UlyssesPopple"
+          ]
+      , div [class "twelve columns"] [text "I architect pixels with planning, a small bit of finger movement, and some computing power."]
+      , div [class "twelve columns"] [text "Below are a selection of projects and performances that I enjoyed working on, and some text about what I enjoyed about them."]
+      ]
     , Html.map ModifyList (WL.view model)
     , div [class "footer"] [text "Copyright 2016 Ulysses Popple, created with ", a [href "http://elm-lang.org/", target "_blank"] [text "Elm"], text "."]
     ]
 
 icon : String -> String -> Html Msg
 icon icon link =
-  a [href link, target "_blank", class "columns pl2 color-inherit"] [i [class ("fa fa-" ++ icon)] []]
+  div [class "one column social-icon"] [a [href link, target "_blank"] [i [class ("ion-social-" ++ icon)] []]]
 
 -- UPDATE
 

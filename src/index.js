@@ -1,8 +1,8 @@
 'use strict';
 
 //import 'foundation-sites/dist/foundation-flex.min.css';
-// require("font-awesome-webpack");
-// require('style-loader!css-loader!less-loader!font-awesome-webpack/font-awesome-styles.loader!font-awesome-webpack/font-awesome.config.js');
+// require("font-awesome-webpack2");
+// require('font-awesome-webpack!font-awesome-webpack/font-awesome.config.js');
 
 require("!style-loader!css-loader!sass-loader!./styles.scss");
 

@@ -22,13 +22,11 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.(css|scss)$/,
+        test: /\.(scss)$/,
         loaders: [
           'style-loader',
           'css-loader',
-          'script-loader',
-          'file-loader',
-          'less-loader'
+          'sass-loader'
         ]
       },
       {
@@ -41,14 +39,8 @@ module.exports = {
         exclude: [/elm-stuff/, /node_modules/],
         loader:  'elm-webpack-loader',
       },
-      {
-        test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: 'url-loader?limit=10000&mimetype=application/font-woff',
-      },
-      {
-        test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: 'file-loader',
-      },
+      { test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url-loader?limit=10000&minetype=application/font-woff" },
+      { test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "file-loader" }
     ],
 
     noParse: /\.elm$/,
