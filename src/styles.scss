@@ -3,10 +3,6 @@
 @import "skeleton/normalize";
 @import "skeleton/skeleton";
 
-html {
-    overflow-y: scroll;
-}
-
 body {
     font-family: 'Roboto', sans-serif;
 }
@@ -15,63 +11,11 @@ h1, h3 {
     font-family: 'Anonymous Pro', monospace;
 }
 
-h3 {
-    font-size: 2.2em;
-}
-
 a h3 {
     color: black;
 }
 
-.work-item {
-    display: block;
-    padding-bottom: 1.2em;
-}
-
-@keyframes bob {
-    0% {  transform: translateY(-0px); }
-    50% {  transform: translateY(-4px); }
-    100% { transform: translateY(-0px); }
-}
-
-.work-link a {
-
-    &:hover {
-        text-decoration: underline;
-    }
-}
-
-.change-display {
-    display: block;
-
-	  &:hover, &:focus, &:active {
-        animation-name: bob;
-        animation-duration: 1.5s;
-        animation-delay: 0s;
-        animation-iteration-count: infinite;
-        -webkit-animation-iteration-count: infinite;
-        animation-timing-function: ease-in-out;
-        animation-fill-mode: forwards;
-        animation-direction: alternate;
-	  }
-}
-
-.inline {
-    display: inline;
-}
-
-.row {
-    margin-bottom: 1em;
-}
-
 .name {
-    margin-bottom: 2em;
-
-    h1 {
-        margin: 0;
-        font-size: 2.5rem;
-    }
-
     a.email {
         color: #888888;
         font-style: italic;
@@ -105,10 +49,11 @@ a h3 {
 .social-icon {
     position: relative;
     display: block;
+    float: right;
     margin: auto 0 auto 0;
     font-size: 3rem;
     vertical-align: center;
-    padding: 8px 32px 8px 32px;
+    padding: 8px 16px 8px 16px;
 
     a {
         color: black;
@@ -125,7 +70,58 @@ a h3 {
 
 .navbar-item {
     position: relative;
-    float: left;
+
+    @media (min-width: 550px) {
+        float: left;
+        padding: 8px 16px 8px 16px;
+    }
+
+    &.active {
+        background: blue;
+
+        a {
+            color: white;
+        }
+    }
+}
+
+.navbar-link {
+    cursor: pointer;
+}
+
+// Content
+
+.work-item {
+    display: block;
+    padding-bottom: 1.2em;
+}
+
+@keyframes bob {
+    0% {  transform: translateY(-0px); }
+    50% {  transform: translateY(-4px); }
+    100% { transform: translateY(-0px); }
+}
+
+.work-link a {
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.change-display {
+    display: block;
+
+	  &:hover, &:focus, &:active {
+        animation-name: bob;
+        animation-duration: 1.5s;
+        animation-delay: 0s;
+        animation-iteration-count: infinite;
+        -webkit-animation-iteration-count: infinite;
+        animation-timing-function: ease-in-out;
+        animation-fill-mode: forwards;
+        animation-direction: alternate;
+	  }
 }
 
 

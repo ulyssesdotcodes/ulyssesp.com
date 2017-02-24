@@ -103,7 +103,7 @@ viewLink { work, displayType } =
         <| withDefault []
         <| Maybe.map (\r -> r.submatches)
         <| List.head
-        <| find (AtMost 1) (regex "(?:(^http(s?)://))([^/?#]+)(?:([/?#]|$))") l
+        <| find (AtMost 1) (regex "(?:(^https?://))([^/?#]+)(?:([/?#]|$))") l
     findDomainp l = map2 (,) l (andThen findDomain l)
   in
     a [name work.slug, href ("#" ++ work.slug), class "work-item", onClick (DisplayAs (reverseDisplay displayType))] ([h3 [class "work-name inline"] [text (work.name ++ " ")]] ++

@@ -28,16 +28,18 @@ type Msg
 -- VIEW
 view : Model -> Html Msg
 view model =
-  div [class "container"]
+  div [class ""]
     [ div [class "container"]
       [ div [class "row header"]
           [ div [class "nine columns"]
               [ h1 [] [text "Ulysses Popple"]
               , a [class "email", href "mailto:ulysses.popple@gmail.com"] [text "ulysses.popple@gmail.com"]
               ]
-          , icon "linkedin" "https://www.linkedin.com/in/ulysses-popple-98649a33"
-          , icon "github" "https://github.com/ulyssesp"
-          , icon "youtube" "https://www.youtube.com/c/UlyssesPopple"
+          , div [class "three columns"]
+              [ icon "linkedin" "https://www.linkedin.com/in/ulysses-popple-98649a33"
+              , icon "github" "https://github.com/ulyssesp"
+              , icon "youtube" "https://www.youtube.com/c/UlyssesPopple"
+              ]
           ]
       , div [class "twelve columns"] [text "I architect pixels with planning, a small bit of finger movement, and some computing power."]
       , div [class "twelve columns"] [text "Below are a selection of projects and performances that I enjoyed working on, and some text about what I enjoyed about them."]
@@ -48,7 +50,7 @@ view model =
 
 icon : String -> String -> Html Msg
 icon icon link =
-  div [class "one column social-icon"] [a [href link, target "_blank"] [i [class ("ion-social-" ++ icon)] []]]
+  div [class "social-icon"] [a [href link, target "_blank"] [i [class ("ion-social-" ++ icon)] []]]
 
 -- UPDATE
 

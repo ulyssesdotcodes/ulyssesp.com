@@ -61,8 +61,8 @@ updateHelp id msg (idp, model) =
 view : Model -> Html Msg
 view model =
   div [class "container"]
-    [ nav [class "navbar"]
-        [ div [class "container"]
+    [ div [class "row"]
+        [ nav [class "navbar"]
           [ ul [ class "navbar-list" ] ([filterSelect "All" Nothing model.filter] ++ (List.map (tagSelect model.filter) [Interactive, Performance, Web, Mobile]))]]
     , div [class "container"] (List.map viewWork model.displayList)
     ]
