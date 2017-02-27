@@ -1,6 +1,8 @@
 module Model exposing (..)
 
+import Array exposing(Array, length, get, fromList, toIndexedList)
 import Json.Decode exposing (..)
+
 
 type Tag
   = Interactive
@@ -62,7 +64,7 @@ type alias Work =
   , summary : String
   , description : String
   , video : Maybe Video
-  , images : List Image
+  , images : Array Image
   , slug : String
   }
 
@@ -80,7 +82,7 @@ workDecoder =
           |> apply (field "summary" string)
           |> apply (field "description" string)
           |> apply (maybe (field "video" videoDecoder))
-          |> apply (andThen (\slug -> field "images" (list (imageDecoder slug))) (field "slug" string))
+          |> apply (andThen (\slug -> field "images" (list (imageDecoder slug)) |> map fromList) (field "slug" string))
           |> apply (field "slug" string)
   in
     field "work" (list work)

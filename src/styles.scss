@@ -3,6 +3,10 @@
 @import "skeleton/normalize";
 @import "skeleton/skeleton";
 
+html {
+    overflow-y: scroll;
+}
+
 body {
     font-family: 'Roboto', sans-serif;
 }
