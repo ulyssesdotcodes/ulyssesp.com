@@ -17,7 +17,7 @@ view { filter, workModels } works =
     [ div [class "row"]
         [ nav [class "navbar"]
           [ ul [ class "navbar-list" ] ([filterSelect "All" Nothing filter] ++ (List.map (tagSelect filter) tags))]]
-    , div [class "container"] (List.map2 viewWork (List.indexedMap (,) workModels) works)
+    , div [class "container"] (List.map viewWork <| filterTag filter <| List.map2 (,) (List.indexedMap (,) workModels) works)
     ]
 
 tags = [Interactive, Performance, Web, Mobile]
@@ -26,8 +26,17 @@ tagSelect : Maybe Tag -> Tag -> Html Msg
 tagSelect cur tag =
   filterSelect (filterText tag) (Just tag) cur
 
-viewWork : (Int, W.Model) -> Work -> Html Msg
-viewWork (id, model) work =
+filterTag : Maybe Tag -> List ((Int, W.Model), Work) -> List ((Int, W.Model), Work)
+filterTag mtag ws =
+  case mtag of
+    (Just tag) ->
+      List.filter (\(_, w) -> List.member tag w.tags) ws
+
+    Nothing ->
+      ws
+
+viewWork : ((Int, W.Model), Work) -> Html Msg
+viewWork ((id, model), work) =
   Html.map (Modify id) (W.view model work)
 
 filterSelect : String -> Maybe Tag -> Maybe Tag -> Html Msg

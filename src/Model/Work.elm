@@ -2,8 +2,6 @@ module Model.Work exposing (..)
 
 import Animation
 
-import Model exposing (..)
-
 type DisplayType = Mini | Full
 
 type alias Model =
