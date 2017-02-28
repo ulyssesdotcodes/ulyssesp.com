@@ -25,8 +25,8 @@ tagParser tag =
     "mobile" -> Just Mobile
     _ -> Nothing
 
-type Video = Youtube String
-type Image = Cloudinary String String
+type Video = Youtube String | CloudinaryVideo String String
+type Image = CloudinaryImage String String
 
 type alias JsonMedia = { source : String, id : String }
 
@@ -35,7 +35,7 @@ imageDecoder slug =
   let
     toImage jm =
       case jm.source of
-        "cloudinary" -> succeed <| Cloudinary slug jm.id
+        "cloudinary" -> succeed <| CloudinaryImage slug jm.id
         _ -> fail "could not decode image type"
   in
     andThen toImage decodeJsonMedia
@@ -46,12 +46,13 @@ decodeJsonMedia =
     (field "source" string)
     (field "id" string)
 
-videoDecoder : Decoder Video
-videoDecoder =
+videoDecoder : String -> Decoder Video
+videoDecoder slug =
   let
     toVideo jm =
       case jm.source of
         "youtube" -> succeed <| Youtube jm.id
+        "cloudinary" -> succeed <| CloudinaryVideo slug jm.id
         _ -> fail "could not decode video type"
   in
     andThen toVideo decodeJsonMedia
@@ -66,6 +67,7 @@ type alias Work =
   , video : Maybe Video
   , images : Array Image
   , slug : String
+  , hero : Image
   }
 
 apply : Decoder a -> Decoder (a -> b) -> Decoder b
@@ -81,9 +83,10 @@ workDecoder =
           |> apply (maybe (field "company" string))
           |> apply (field "summary" string)
           |> apply (field "description" string)
-          |> apply (maybe (field "video" videoDecoder))
-          |> apply (andThen (\slug -> field "images" (list (imageDecoder slug)) |> map fromList) (field "slug" string))
+          |> apply (maybe (field "slug" string |> map videoDecoder |> andThen (field "video")))
+          |> apply (field "slug" string |> andThen (\slug -> field "images" (list (imageDecoder slug)) |> map fromList))
           |> apply (field "slug" string)
+          |> apply (field "slug" string |> map imageDecoder |> andThen (field "hero"))
   in
     field "work" (list work)
 

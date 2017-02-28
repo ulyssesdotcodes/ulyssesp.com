@@ -31,9 +31,9 @@ viewNotFound =
 viewMini : Work -> Html Msg
 viewMini work =
   div [class "container"]
-    [ miniTitle work
+    [ miniImage work
+    , miniTitle work
     , p [] [ text (withDefault "Personal" (Maybe.map ((++) "Company: ") work.company))]
-    , Markdown.toHtml [] work.summary
     ]
 
 viewFull : Model -> Work -> Html Msg
@@ -41,12 +41,12 @@ viewFull model work =
   div []
     [ fullTitle work
     , div [class "container"]
-      ([ viewImages model.imageLeft model.selectedImage work.images
-      , p [] [ text (withDefault "Personal" (Maybe.map ((++) "Company: ") work.company))]
-      , Markdown.toHtml [] work.description
-      ]
-      ++
-      (withDefault [] <| Maybe.map ((\x -> [x]) << viewVideo) work.video)
+      ((withDefault [] <| Maybe.map ((\x -> [x]) << viewVideo) work.video)
+         ++
+         [ p [] [ text (withDefault "Personal" (Maybe.map ((++) "Company: ") work.company))]
+         , Markdown.toHtml [] work.description
+         , viewImages model.imageLeft model.selectedImage work.images
+         ]
       )
     ]
 
@@ -74,8 +74,21 @@ viewVideo : Video -> Html Msg
 viewVideo vid =
   case vid of
     (Youtube id) ->
-      div [class "media flex-video"]
-        [ iframe [src ("https://www.youtube.com/embed/" ++ id)] []]
+      div [class "media row"]
+        [ iframe [class "twelve columns", src ("https://www.youtube.com/embed/" ++ id)] [] ]
+
+    (CloudinaryVideo slug id) ->
+      div [class "media row"]
+        [ video [ class "twelve columns"
+                , src ("http://res.cloudinary.com/dezngnedw/video/upload/v1488300074/ulyssesp.com/"
+                         ++
+                         slug
+                         ++ "/" ++
+                         id
+                      )
+                , autoplay False
+                , controls True
+                ] [] ]
 
 viewImages : Animation.State -> Int -> Array Image -> Html Msg
 viewImages imageLeft selected images =
@@ -94,13 +107,7 @@ viewImages imageLeft selected images =
 
 viewImage : Bool -> Image -> Html Msg
 viewImage active media =
-  case media of
-    (Cloudinary slug id) ->
-      li [] [img [ class (if active then "is-active" else "")
-                 , src ("http://res.cloudinary.com/dezngnedw/image/upload/c_fit,h_375,w_666/v1472550364/ulyssesp.com/" ++
-                          slug ++ "/" ++ id)
-             ] []
-        ]
+  li [] [ img [ class (if active then "is-active" else "") , src <| cloudinary media] [] ]
 
 fullTitle : Work -> Html Msg
 fullTitle w =
@@ -117,3 +124,13 @@ externalLink : String -> Maybe (Html Msg)
 externalLink link =
   findDomain link
     |> Maybe.map (\d -> a [href link, target "_blank"] [text ("[" ++ d ++ "]")])
+
+miniImage : Work -> Html Msg
+miniImage work = img [class "hero", src <| cloudinary work.hero] []
+
+cloudinary : Image -> String
+cloudinary media =
+  case media of
+    (CloudinaryImage slug id) ->
+      "http://res.cloudinary.com/dezngnedw/image/upload/c_scale,w_960/c_crop,h_540,w_960/v1472550364/ulyssesp.com/" ++
+        slug ++ "/" ++ id
