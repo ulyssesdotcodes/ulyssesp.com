@@ -27,7 +27,21 @@ a h3 {
 }
 
 .work-name {
+    display: inline;
     padding-top: 0.5em;
+    margin-right: 1em;
+    text-decoration: none;
+    border-bottom: 2px solid #1EAEDB;
+
+    &.no-link {
+        padding-top: 1em;
+        border-bottom: 0px;
+        margin-right: 0.5em;
+    }
+
+    h3 {
+        display: inline;
+    }
 }
 
 .list-filter {
@@ -43,11 +57,26 @@ a h3 {
     text-align: center;
 }
 
+.title.full {
+    margin-top: 1em;
+    margin-bottom: 3em;
+}
+
+.title.mini {
+    margin-top: 2em;
+    margin-bottom: 0.4em;
+}
+
 // Header
 
 .header {
     margin-top: 1em;
     vertical-align: center;
+
+    h1 a {
+        color: black;
+        text-decoration: none;
+    }
 }
 
 .social-icon {

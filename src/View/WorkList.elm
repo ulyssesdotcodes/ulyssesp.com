@@ -14,11 +14,13 @@ import Model
 view : Model -> List Model.Work -> Html Msg
 view { filter, workModels } works =
   div [class "container"]
-    [ div [class "row"]
+    ([ div [class "row"]
         [ nav [class "navbar"]
           [ ul [ class "navbar-list" ] ([filterSelect "All" Nothing filter] ++ (List.map (tagSelect filter) tags))]]
-    , div [class "container"] (List.map viewWork <| filterTag filter <| List.map2 (,) (List.indexedMap (,) workModels) works)
     ]
+    ++
+    (List.map viewWork <| filterTag filter <| List.map2 (,) (List.indexedMap (,) workModels) works)
+    )
 
 tags = [Interactive, Performance, Web, Mobile]
 

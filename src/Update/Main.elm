@@ -2,7 +2,6 @@ module Update.Main exposing (..)
 
 import Http
 import Navigation
-import UrlParser exposing (parseHash, string, (</>), oneOf, Parser, s, top)
 import Maybe exposing (map, withDefault)
 import Monocle.Optional exposing (modify)
 
@@ -15,8 +14,6 @@ import Msg.WorkList as WL
 import Msg.Work as W
 import Update.WorkList as WL
 import Update.Work as W
-
-type Route = WorkList | Work String
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
@@ -63,26 +60,6 @@ update msg model =
 
     UrlChange loc ->
       ( changeUrl loc model, Cmd.none )
-
-changeUrl : Navigation.Location -> Model -> Model
-changeUrl loc model =
-  case parseHash route loc of
-
-    (Just WorkList) ->
-      { model | content = ContentList <| WL.generateModels model.works WL.init }
-
-    (Just (Work id)) ->
-      { model | content = ContentSingle (W.init W.Full) id }
-
-    Nothing ->
-      { model | content = ContentNotFound }
-
-route : Parser (Route -> a) a
-route =
-  oneOf
-    [ UrlParser.map WorkList top
-    , UrlParser.map Work (s "work" </> string)
-    ]
 
 fetchData : Cmd Msg
 fetchData =

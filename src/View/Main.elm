@@ -12,8 +12,29 @@ import View.Work as W
 
 view : Model -> Html Msg
 view model =
-  div [class ""]
-    [ viewHeader model.content
+  div []
+    [ div [class "container"]
+      [ div [class "row header"]
+          ([ div [class "nine columns"]
+              ([ h1 [] [a [href "#"] [text "Ulysses Popple"]] ]
+              ++ (if fullHeader model.content then
+                   [a [class "email", href "mailto:ulysses.popple@gmail.com"] [text "ulysses.popple@gmail.com"]]
+                 else [])
+              )
+          , div [class "three columns"]
+            [ icon "linkedin" "https://www.linkedin.com/in/ulysses-popple-98649a33"
+            , icon "github" "https://github.com/ulyssesp"
+            , icon "youtube" "https://www.youtube.com/c/UlyssesPopple"
+            ]
+          ]
+          ++
+          (if fullHeader model.content then
+            [ div [class "twelve columns"] [text "I architect pixels with planning, a small bit of finger movement, and some computing power."]
+            , div [class "twelve columns"] [text "Below are a selection of projects and performances that I enjoyed working on, and some text about what I enjoyed about them."]
+            ]
+           else []
+          ))
+    ]
     , viewContent model
     , div [class "footer"] [text "Copyright 2016 Ulysses Popple, created with ", a [href "http://elm-lang.org/", target "_blank"] [text "Elm"], text "."]
     ]
@@ -34,40 +55,11 @@ viewContent model =
     ContentNotFound ->
       div [class "container"] [text "Content not found"]
 
-viewHeader : Content -> Html Msg
-viewHeader content =
+fullHeader : Content -> Bool
+fullHeader content =
   case content of
-    (ContentList _) ->
-       div [class "container"]
-         [ div [class "row header"]
-             [ div [class "nine columns"]
-                 [ h1 [] [text "Ulysses Popple"]
-                 , a [class "email", href "mailto:ulysses.popple@gmail.com"] [text "ulysses.popple@gmail.com"]
-                 ]
-             , div [class "three columns"]
-               [ icon "linkedin" "https://www.linkedin.com/in/ulysses-popple-98649a33"
-               , icon "github" "https://github.com/ulyssesp"
-               , icon "youtube" "https://www.youtube.com/c/UlyssesPopple"
-               ]
-             ]
-        , div [class "twelve columns"] [text "I architect pixels with planning, a small bit of finger movement, and some computing power."]
-        , div [class "twelve columns"] [text "Below are a selection of projects and performances that I enjoyed working on, and some text about what I enjoyed about them."]
-         ]
-
-    _ ->
-      div [class "container"]
-        [ div [class "row header"]
-            [ div [class "nine columns"]
-                [ h1 [] [text "Ulysses Popple"]
-                , a [class "email", href "mailto:ulysses.popple@gmail.com"] [text "ulysses.popple@gmail.com"]
-                ]
-            , div [class "three columns"]
-                [ icon "linkedin" "https://www.linkedin.com/in/ulysses-popple-98649a33"
-                , icon "github" "https://github.com/ulyssesp"
-                , icon "youtube" "https://www.youtube.com/c/UlyssesPopple"
-                ]
-            ]
-        ]
+    ContentList _ -> True
+    _ -> False
 
 icon : String -> String -> Html Msg
 icon icon link =

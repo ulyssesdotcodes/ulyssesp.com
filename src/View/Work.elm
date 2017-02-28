@@ -21,48 +21,54 @@ view model work =
       case model.displayType of
         Mini -> viewMini work
         Full -> viewFull model work
-    nextDisplay =
-      case model.displayType of
-        Mini -> a [class "change-display", href ("#" ++ work.slug), onClick (DisplayAs Full)] [text "Show more"]
-        Full -> a [class "change-display", href ("#" ++ work.slug), onClick (DisplayAs Mini)] [text "Show less"]
   in
-    div [class "row align-center"] [div [class "ten columns"] (mainView ++ [ p [] [nextDisplay] ]) ]
+    mainView
 
 viewNotFound : Html Msg
 viewNotFound =
   div [class "ten columns"] [text "Couldn't find that work!"]
 
-viewMini : Work -> List (Html Msg)
+viewMini : Work -> Html Msg
 viewMini work =
-  [ viewLink work
-  , p [] [ text (withDefault "Personal" (Maybe.map ((++) "Company: ") work.company))]
-  , Markdown.toHtml [] work.summary
-  ]
+  div [class "container"]
+    [ miniTitle work
+    , p [] [ text (withDefault "Personal" (Maybe.map ((++) "Company: ") work.company))]
+    , Markdown.toHtml [] work.summary
+    ]
 
-viewFull : Model -> Work -> List (Html Msg)
+viewFull : Model -> Work -> Html Msg
 viewFull model work =
-  (viewMini work) ++
-  [ Markdown.toHtml [] work.description
-  ]
-  ++
-  (withDefault [] <| Maybe.map ((\x -> [x]) << viewVideo) work.video)
-  ++
-  [viewImages model.imageLeft model.selectedImage work.images]
+  div []
+    [ fullTitle work
+    , div [class "container"]
+      ([ viewImages model.imageLeft model.selectedImage work.images
+      , p [] [ text (withDefault "Personal" (Maybe.map ((++) "Company: ") work.company))]
+      , Markdown.toHtml [] work.description
+      ]
+      ++
+      (withDefault [] <| Maybe.map ((\x -> [x]) << viewVideo) work.video)
+      )
+    ]
 
-viewLink : Work -> Html Msg
-viewLink work =
+miniTitle : Work -> Html Msg
+miniTitle work =
   let
-    findDomain l =
-      withDefault Nothing
-        <| get 1 << fromList << List.filter ((/=) (Just "s"))
-        <| withDefault []
-        <| Maybe.map (\r -> r.submatches)
-        <| List.head
-        <| find (AtMost 1) (regex "(?:(^https?://))([^/?#]+)(?:([/?#]|$))") l
     findDomainp l = map2 (,) l (andThen findDomain l)
   in
-    a [name work.slug, href ("#work/" ++ work.slug), class "work-item"] ([h3 [class "work-name inline"] [text (work.name ++ " ")]] ++
-            (withDefault [] (Maybe.map (\l -> [h6 [class "work-link inline"] [a [href (Tuple.first l), target "_blank"] [text ("[" ++ (Tuple.second l) ++ "]")]]]) (findDomainp work.link))))
+    div [class "title mini"]
+      ([ a [name work.slug, href ("#work/" ++ work.slug), class "work-name"]
+        [h3 [] [text (work.name)]]
+       ] ++
+      (work.link |> andThen externalLink |> Maybe.map List.singleton |> withDefault []))
+
+findDomain : String -> Maybe String
+findDomain l =
+  withDefault Nothing
+    <| get 1 << fromList << List.filter ((/=) (Just "s"))
+    <| withDefault []
+    <| Maybe.map (\r -> r.submatches)
+    <| List.head
+    <| find (AtMost 1) (regex "(?:(^https?://))([^/?#]+)(?:([/?#]|$))") l
 
 viewVideo : Video -> Html Msg
 viewVideo vid =
@@ -91,6 +97,23 @@ viewImage active media =
   case media of
     (Cloudinary slug id) ->
       li [] [img [ class (if active then "is-active" else "")
-                 , src ("http://res.cloudinary.com/dezngnedw/image/upload/c_fit,h_375,w_666/v1472550364/ulyssesp.com/" ++ slug ++ "/" ++ id)
+                 , src ("http://res.cloudinary.com/dezngnedw/image/upload/c_fit,h_375,w_666/v1472550364/ulyssesp.com/" ++
+                          slug ++ "/" ++ id)
              ] []
         ]
+
+fullTitle : Work -> Html Msg
+fullTitle w =
+  div [class ""]
+    [ a [href "#"] [text "Projects"]
+    , text " > "
+    , div [class "title full"]
+      ([h3 [class "work-name inline no-link"] [text (w.name)]] ++
+       (w.link |> andThen externalLink |> Maybe.map List.singleton |> withDefault [])
+      )
+    ]
+
+externalLink : String -> Maybe (Html Msg)
+externalLink link =
+  findDomain link
+    |> Maybe.map (\d -> a [href link, target "_blank"] [text ("[" ++ d ++ "]")])
