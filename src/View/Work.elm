@@ -5,6 +5,7 @@ import Array exposing(Array, length, get, fromList, toIndexedList)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onClick)
+import Json.Decode
 import List
 import Markdown
 import Maybe exposing (withDefault, map, withDefault, andThen, map2)
@@ -13,6 +14,8 @@ import Regex exposing (..)
 import Model exposing (..)
 import Msg.Work exposing (..)
 import Model.Work exposing (..)
+
+type ImageSize = Original | Hero | Thumb
 
 view : Model -> Work -> Html Msg
 view model work =
@@ -45,7 +48,7 @@ viewFull model work =
          ++
          [ p [] [ text (withDefault "Personal" (Maybe.map ((++) "Company: ") work.company))]
          , Markdown.toHtml [] work.description
-         , viewImages model.imageLeft model.selectedImage work.images
+         , viewImages model.selectedImage work.images
          ]
       )
     ]
@@ -90,29 +93,37 @@ viewVideo vid =
                 , controls True
                 ] [] ]
 
-viewImages : Animation.State -> Int -> Array Image -> Html Msg
-viewImages imageLeft selected images =
+viewImages : Maybe Int -> Array Image -> Html Msg
+viewImages selected images =
   div [class "gallery"]
-    (
-    (if length images > 1 then
-      [ div [class "control left", onClick PrevImage] [i [class "fa fa-arrow-left"] []]
-      , div [class "control right", onClick NextImage] [i [class "fa fa-arrow-right"] []]]
-    else [])
-    ++
-    [ ul (Animation.render imageLeft)
-        (List.map (\indexedImage -> viewImage ((Tuple.first indexedImage) == selected) (Tuple.second indexedImage)) <| toIndexedList images)
-    ]
+    ((
+      selected
+        |> Maybe.andThen (\i -> Maybe.map (\image -> (i, image)) <| get i images)
+        |> Maybe.map (\(index, image) ->
+                        List.singleton
+                          <| div [class "lightbox", onClick HideLightbox]
+                              [ img [src <| imgSrc Original image] []
+                              , div [class ("control next" ++ if index < length images - 1 then "" else " hidden"), Html.Events.onWithOptions "click" (Html.Events.Options True False) (Json.Decode.succeed NextImage)] [text ">"]
+                              , div [class ("control prev" ++ if index > 0  then "" else " hidden"), Html.Events.onWithOptions "click" (Html.Events.Options True False) (Json.Decode.succeed PrevImage)] [text "<"]
+                              ]
+                     )
+        |> Maybe.withDefault []
     )
+    ++
+    [ ul []
+        (List.map (\indexedImage -> viewImage (Tuple.first indexedImage) (Tuple.second indexedImage)) <| toIndexedList images)
+    ])
 
 
-viewImage : Bool -> Image -> Html Msg
-viewImage active media =
-  li [] [ img [ class (if active then "is-active" else "") , src <| cloudinary media] [] ]
+viewImage : Int -> Image -> Html Msg
+viewImage imgIndex media =
+  li [class "three columns", onClick (ShowImage imgIndex)]
+    [ img [ src <| imgSrc Thumb media ] [] ]
 
 fullTitle : Work -> Html Msg
 fullTitle w =
-  div [class ""]
-    [ a [href "#"] [text "Projects"]
+  div []
+    [ a [href "#"] [h6 [] [text "Projects"]]
     , text " > "
     , div [class "title full"]
       ([h3 [class "work-name inline no-link"] [text (w.name)]] ++
@@ -126,11 +137,17 @@ externalLink link =
     |> Maybe.map (\d -> a [href link, target "_blank"] [text ("[" ++ d ++ "]")])
 
 miniImage : Work -> Html Msg
-miniImage work = img [class "hero", src <| cloudinary work.hero] []
+miniImage work = a [name work.slug, href ("#work/" ++ work.slug)] [img [class "hero", src <| imgSrc Hero work.hero] []]
 
-cloudinary : Image -> String
-cloudinary media =
+imgSrc : ImageSize -> Image -> String
+imgSrc imgSize media =
   case media of
     (CloudinaryImage slug id) ->
-      "http://res.cloudinary.com/dezngnedw/image/upload/c_scale,w_960/c_crop,h_540,w_960/v1472550364/ulyssesp.com/" ++
-        slug ++ "/" ++ id
+      let
+        transform =
+          case imgSize of
+            Original -> ""
+            Hero -> "/c_scale,w_960/c_crop,h_540,w_960"
+            Thumb -> "/c_scale,w_600/c_crop,h_338,w_600"
+      in
+        "http://res.cloudinary.com/dezngnedw/image/upload" ++ transform  ++ "/v1472550364/ulyssesp.com/" ++ slug ++ "/" ++ id

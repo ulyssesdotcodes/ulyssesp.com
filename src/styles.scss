@@ -19,6 +19,14 @@ a h3 {
     color: black;
 }
 
+.hidden {
+    display: none;
+}
+
+h3, h6 {
+    display: inline-block;
+}
+
 .name {
     a.email {
         color: #888888;
@@ -63,14 +71,10 @@ a h3 {
         border-bottom: 0px;
         margin-right: 0.5em;
     }
-
-    h3 {
-        display: inline;
-    }
 }
 
 .hero {
-    margin-top: 2em;
+    margin-top: 4em;
     width: 100%;
 }
 
@@ -181,6 +185,51 @@ a h3 {
     overflow: hidden;
     margin: 20px auto 20px auto;
 
+    .lightbox {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.3);
+        z-index: 80;
+
+        img {
+            position: absolute;
+            max-width: 80%;
+            max-height: 80%;
+            top: 50%;
+            left: 50%;
+            margin-right: -50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .control {
+            position: absolute;
+            font-size: 343px;
+            cursor: pointer;
+            @media screen and (max-width: 661px) {
+                display: none;
+            }
+            z-index: 100;
+            width: 49%;
+
+            &.prev {
+                top: 50%;
+                left: 0;
+                transform: translate(0, -50%);
+            }
+
+            &.next {
+                top: 50%;
+                right:0;
+                text-align: right;
+                transform: translate(0, -50%);
+            }
+        }
+
+    }
+
     ul {
         position: relative;
         list-style: none;
@@ -195,24 +244,21 @@ a h3 {
         li {
             position: relative;
             display: inline-block;
-            width: 661px;
-            @media screen and (max-width: 661px) {
-                width: 100%;
-            }
             text-align: center;
 
             img {
-                max-width: 661px;
-                opacity: 0.8;
+                padding: 4px;
+                width: 100%;
+
+                &:hover {
+                    padding: 3px;
+                    border: 1px solid black;
+                }
+
                 @media screen and (max-width: 661px) {
                     max-width: 100%;
-                    opacity: 1;
                     margin-top: 0.5em;
                 }
-            }
-
-            img.is-active {
-                opacity: 1;
             }
         }
     }
@@ -224,26 +270,5 @@ a h3 {
         -ms-transform: translateY(-50%);
         transform: translateY(-50%);
         font-size: 1.2em;
-    }
-
-    .control {
-        position: absolute;
-        height: 343px;
-        cursor: pointer;
-        display: block;
-        @media screen and (max-width: 661px) {
-            display: none;
-        }
-        z-index: 100;
-        width: 49%;
-    }
-
-    .left {
-        left: 0;
-    }
-
-    .right {
-        right:0;
-        text-align: right;
     }
 }

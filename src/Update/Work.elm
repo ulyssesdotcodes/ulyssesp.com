@@ -9,17 +9,14 @@ update msg m =
     (DisplayAs t) ->
       { m | displayType = t }
 
-    NextImage -> m
-      -- let
-      --   sip = (m.selectedImage + 1) % (length m.images)
-      -- in
-      --   { m | selectedImage = sip, imageLeft = Animation.update |> Animation.duration second |> Animation.spring wobbly |> Animation.to [Left (toFloat (sip * -660)) Px] |> Animation.on m.imageLeft }
+    NextImage ->
+      { m | selectedImage = Maybe.map ((+) 1) m.selectedImage }
 
-    PrevImage -> m
-      -- let
-      --   sip = (m.selectedImage - 1) % (length m.images)
-      -- in
-      --   { m | selectedImage = sip, imageLeft = Animation.animate |> Animation.duration second |> Animation.spring wobbly |> Animation.to [Left (toFloat (sip * -660)) Px] |> Animation.on m.imageLeft }
+    PrevImage ->
+      { m | selectedImage = Maybe.map ((-) 1) m.selectedImage }
 
-    Animate t -> m
-      -- { m | imageLeft = Animation.tick t m.imageLeft }
+    ShowImage imgIndex ->
+      { m | selectedImage = Just imgIndex }
+
+    HideLightbox ->
+      { m | selectedImage = Nothing }
