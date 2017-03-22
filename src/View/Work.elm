@@ -103,8 +103,9 @@ viewImages selected images =
                         List.singleton
                           <| div [class "lightbox", onClick HideLightbox]
                               [ img [src <| imgSrc Original image] []
-                              , div [class ("control next" ++ if index < length images - 1 then "" else " hidden"), Html.Events.onWithOptions "click" (Html.Events.Options True False) (Json.Decode.succeed NextImage)] [text ">"]
-                              , div [class ("control prev" ++ if index > 0  then "" else " hidden"), Html.Events.onWithOptions "click" (Html.Events.Options True False) (Json.Decode.succeed PrevImage)] [text "<"]
+                              , div [class ("control next" ++ if index < length images - 1 then "" else " hidden"), Html.Events.onWithOptions "click" (Html.Events.Options True False) (Json.Decode.succeed NextImage)] [i [class "ion-arrow-right-b"] []]
+                              , div [class ("control prev" ++ if index > 0  then "" else " hidden"), Html.Events.onWithOptions "click" (Html.Events.Options True False) (Json.Decode.succeed PrevImage)] [i [class "ion-arrow-left-b"] []]
+                              , div [class "control close"] [i [class "ion-close-round"] []]
                               ]
                      )
         |> Maybe.withDefault []

@@ -1,38 +1,6 @@
 {
   "work": [
     {
-      "name": "NBA Crunch Time with SAP",
-      "slug": "crunchtime",
-      "hero": { "source": "cloudinary", "id": "game-selection.jpg" },
-      "company": "Wildlife, Momentum, NBA",
-      "position": "Contract Developer",
-      "summary": "An interactive kinect experience where users would coach a basketball team at crunch time. Also adapted for tablets.",
-      "description": "The NBA and SAP wanted to highlight stats in an innovative way at the NBA Commissioner's Tech Summit. To do this we created an interactive experience where the user was presented footage of a play followed by three options of which call to make next. They used the stats to decide on a play and then pointed to the screen to select it and play it. The interaction was powered by Touchdesigner and Kinect. The NBA also requested a tablet experience to be playable while executives waiting for meetings. We adapted the interactive experience to use multitouch and installed it on Surface Pro tablets.",
-      "images": [
-        { "source": "cloudinary", "id": "game-selection.jpg" }
-      ],
-      "tags": [
-        "interactive"
-      ]
-    },
-    {
-      "name": "Ringly Android App",
-      "slug": "ringly",
-      "link" : "https://play.google.com/store/apps/details?id=com.ringly.ringly",
-      "hero": { "source": "cloudinary", "id": "screens.jpg" },
-      "company": "Ringly",
-      "position": "Contract Developer",
-      "summary": "The Android app for Ringly's smart jewelry. My role was to redesign the app using Material Design principles and add in step tracking capabilities.",
-      "description": "Working closely with the hardware team and Ringly's on-site designer, I updated the app to reflect modern Android approaches. Material Design components and principles are now front and center in the app design and architecture. To add step tracking capabilties, I updated the codebase to use modern RxJava and RxAndroid libraries and worked with the hardware team to ensure compatibilty with Android's bluetooth system.",
-      "video": { "source": "youtube", "id": "C5c06ayfTYs"},
-      "images": [
-        { "source": "cloudinary", "id": "game-selection.jpg" }
-      ],
-      "tags": [
-        "mobile"
-      ]
-    },
-    {
       "name": "#LetsJoinHands",
       "slug": "lets-join-hands",
       "link" : "http://wildlife.la/letsjoinhands",
@@ -100,6 +68,40 @@
       ],
       "tags": [
         "web",
+        "mobile"
+      ]
+    }
+  ],
+  "unpublished" : [
+    {
+      "name": "NBA Crunch Time with SAP",
+      "slug": "crunchtime",
+      "hero": { "source": "cloudinary", "id": "game-selection.jpg" },
+      "company": "Wildlife, Momentum, NBA",
+      "position": "Contract Developer",
+      "summary": "An interactive kinect experience where users would coach a basketball team at crunch time. Also adapted for tablets.",
+      "description": "The NBA and SAP wanted to highlight stats in an innovative way at the NBA Commissioner's Tech Summit. To do this we created an interactive experience where the user was presented footage of a play followed by three options of which call to make next. They used the stats to decide on a play and then pointed to the screen to select it and play it. The interaction was powered by Touchdesigner and Kinect. The NBA also requested a tablet experience to be playable while executives waiting for meetings. We adapted the interactive experience to use multitouch and installed it on Surface Pro tablets.",
+      "images": [
+        { "source": "cloudinary", "id": "game-selection.jpg" }
+      ],
+      "tags": [
+        "interactive"
+      ]
+    },
+    {
+      "name": "Ringly Android App",
+      "slug": "ringly",
+      "link" : "https://play.google.com/store/apps/details?id=com.ringly.ringly",
+      "hero": { "source": "cloudinary", "id": "screens.jpg" },
+      "company": "Ringly",
+      "position": "Contract Developer",
+      "summary": "The Android app for Ringly's smart jewelry. My role was to redesign the app using Material Design principles and add in step tracking capabilities.",
+      "description": "Working closely with the hardware team and Ringly's on-site designer, I updated the app to reflect modern Android approaches. Material Design components and principles are now front and center in the app design and architecture. To add step tracking capabilties, I updated the codebase to use modern RxJava and RxAndroid libraries and worked with the hardware team to ensure compatibilty with Android's bluetooth system.",
+      "video": { "source": "youtube", "id": "C5c06ayfTYs"},
+      "images": [
+        { "source": "cloudinary", "id": "screens.jpg" }
+      ],
+      "tags": [
         "mobile"
       ]
     }
