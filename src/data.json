@@ -1,6 +1,30 @@
 {
   "work": [
     {
+      "name": "NBA Crunch Time with SAP",
+      "slug": "crunchtime",
+      "hero": { "source": "cloudinary", "id": "game-selection.jpg" },
+      "technologies": ["TouchDesigner", "Kinect"],
+      "highlights": [
+        "Used Kinect to create a touch-free pointing interface for the experience",
+        "Integrated NBA footage with interactive UX for a seamless experience on input sketches and video from Wildlife's designers",
+        "Tested and approved on site by the NBA commissioner, Adam Silver, personally.",
+        "Developed both Kinect and tablet versions on a strict and limited timeline by using the same TouchDesigner file and writing a build script."
+      ],
+      "company": "Wildlife, Momentum, NBA",
+      "position": "Contract Developer",
+      "summary": "An interactive kinect experience where users would coach a basketball team at crunch time. Also adapted for tablets.",
+      "description": "The NBA and SAP wanted to highlight stats in an innovative way at the NBA Commissioner's Tech Summit. To do this we created an interactive experience where the user was presented footage of a play followed by three options of which call to make next. They used the stats to decide on a play and then pointed to the screen to select it and play it. The interaction was powered by Touchdesigner and Kinect. The NBA also requested a tablet experience to be playable while executives waiting for meetings. We adapted the interactive experience to use multitouch and installed it on Surface Pro tablets.",
+      "video": { "source": "cloudinary", "id": "runthrough.mp4" },
+      "images": [
+        { "source": "cloudinary", "id": "techzone.jpg" },
+        { "source": "cloudinary", "id": "pointing.jpg" }
+      ],
+      "tags": [
+        "interactive"
+      ]
+    },
+    {
       "name": "Ringly Android App",
       "slug": "ringly",
       "link" : "https://play.google.com/store/apps/details?id=com.ringly.ringly",
@@ -125,21 +149,5 @@
     }
   ],
   "unpublished" : [
-    {
-      "name": "NBA Crunch Time with SAP",
-      "slug": "crunchtime",
-      "hero": { "source": "cloudinary", "id": "game-selection.jpg" },
-      "technologies": ["TouchDesigner", "Kinect"],
-      "company": "Wildlife, Momentum, NBA",
-      "position": "Contract Developer",
-      "summary": "An interactive kinect experience where users would coach a basketball team at crunch time. Also adapted for tablets.",
-      "description": "The NBA and SAP wanted to highlight stats in an innovative way at the NBA Commissioner's Tech Summit. To do this we created an interactive experience where the user was presented footage of a play followed by three options of which call to make next. They used the stats to decide on a play and then pointed to the screen to select it and play it. The interaction was powered by Touchdesigner and Kinect. The NBA also requested a tablet experience to be playable while executives waiting for meetings. We adapted the interactive experience to use multitouch and installed it on Surface Pro tablets.",
-      "images": [
-        { "source": "cloudinary", "id": "game-selection.jpg" }
-      ],
-      "tags": [
-        "interactive"
-      ]
-    }
   ]
 }
