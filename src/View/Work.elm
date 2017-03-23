@@ -37,7 +37,34 @@ viewMini work =
     [ miniImage work
     , miniTitle work
     , p [] [ text (withDefault "Personal" (Maybe.map ((++) "Company: ") work.company))]
+    , viewTechList work.technologies
     ]
+
+viewTechList : List String -> Html Msg
+viewTechList techs =
+  let
+    printList str =
+      case str of
+        (s::[]) ->
+          s
+
+        (s::ss) ->
+          s ++ ", " ++ printList ss
+
+        _ ->
+          ""
+  in
+    p [] [ text ("Techonolgies: " ++  printList techs)]
+
+viewHighlights : List String -> Html Msg
+viewHighlights highlights =
+  let
+    viewHighlight h = li [class "highlight"] [text h]
+  in
+    div [class "highlights"]
+      [ h6 [] [text "Highlights:"]
+      , ul [class "highlights"] <| List.map viewHighlight highlights
+      ]
 
 viewFull : Model -> Work -> Html Msg
 viewFull model work =
@@ -47,6 +74,8 @@ viewFull model work =
       ((withDefault [] <| Maybe.map ((\x -> [x]) << viewVideo) work.video)
          ++
          [ p [] [ text (withDefault "Personal" (Maybe.map ((++) "Company: ") work.company))]
+         , viewTechList work.technologies
+         , viewHighlights work.highlights
          , Markdown.toHtml [] work.description
          , viewImages model.selectedImage work.images
          ]

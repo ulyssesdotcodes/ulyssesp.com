@@ -43,6 +43,7 @@ h3, h6 {
     position: relative;
     padding-bottom: 56.25%;
     margin-top: 0.8em;
+    margin-bottom: 2em;
     height: 0;
 
     iframe {
@@ -86,6 +87,19 @@ h3, h6 {
 .title.mini {
     margin-top: 0.5em;
     margin-bottom: 0.4em;
+}
+
+.highlights {
+    ul {
+        list-style-type: disc;
+        list-style-position: inside;
+        text-indent: -2em;
+        padding-left: 3em;
+    }
+
+    li {
+        line-height: 2rem;
+    }
 }
 
 // Header

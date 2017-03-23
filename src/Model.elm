@@ -68,6 +68,8 @@ type alias Work =
   , images : Array Image
   , slug : String
   , hero : Image
+  , technologies : List String
+  , highlights : List String
   }
 
 apply : Decoder a -> Decoder (a -> b) -> Decoder b
@@ -87,6 +89,8 @@ workDecoder =
           |> apply (field "slug" string |> andThen (\slug -> field "images" (list (imageDecoder slug)) |> map fromList))
           |> apply (field "slug" string)
           |> apply (field "slug" string |> map imageDecoder |> andThen (field "hero"))
+          |> apply (field "technologies" <| list string)
+          |> apply (field "highlights" <| list string)
   in
     field "work" (list work)
 
