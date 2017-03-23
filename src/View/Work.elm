@@ -112,7 +112,7 @@ viewVideo vid =
     (CloudinaryVideo slug id) ->
       div [class "media row"]
         [ video [ class "twelve columns"
-                , src ("http://res.cloudinary.com/dezngnedw/video/upload/v1488300074/ulyssesp.com/"
+                , src ("https://res.cloudinary.com/dezngnedw/video/upload/v1488300074/ulyssesp.com/"
                          ++
                          slug
                          ++ "/" ++
@@ -180,4 +180,4 @@ imgSrc imgSize media =
             Hero -> "/c_scale,w_960/c_crop,h_540,w_960"
             Thumb -> "/c_scale,w_600/c_crop,h_338,w_600"
       in
-        "http://res.cloudinary.com/dezngnedw/image/upload" ++ transform  ++ "/v1472550364/ulyssesp.com/" ++ slug ++ "/" ++ id
+        "https://res.cloudinary.com/dezngnedw/image/upload" ++ transform  ++ "/v1472550364/ulyssesp.com/" ++ slug ++ "/" ++ id
