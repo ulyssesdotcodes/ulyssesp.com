@@ -16,7 +16,10 @@ view { filter, workModels } works =
   div [class "container"]
     ([ div [class "row"]
         [ nav [class "navbar"]
-          [ ul [ class "navbar-list" ] ([filterSelect "All" Nothing filter] ++ (List.map (tagSelect filter) tags))]]
+          [ ul [ class "navbar-list" ] ([filterSelect "All" Nothing filter] ++ (List.map (tagSelect filter) tags))
+          , div [class "navbar-item blog-link"] [a [href "/blog"] [text "Blog"]]
+          ]
+        ]
     ]
     ++
     (List.map viewWork <| filterTag filter <| List.map2 (,) (List.indexedMap (,) workModels) works)
