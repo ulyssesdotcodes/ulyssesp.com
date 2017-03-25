@@ -50,7 +50,7 @@ module.exports = {
     stats: { colors: true },
   },
   plugins: [
-    new CopyWebpackPlugin([ { from: './src/data.json' }, {from: './src/favicon.ico' } ])
+    new CopyWebpackPlugin([ { from: './src/data.json' }, {from: './src/favicon.ico' },  {from: './src/ionicons/' }])
   ]
 
 };
