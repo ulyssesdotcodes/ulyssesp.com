@@ -54,7 +54,7 @@ viewTechList techs =
         _ ->
           ""
   in
-    p [] [ text ("Techonolgies: " ++  printList techs)]
+    p [] [ text ("Technologies: " ++  printList techs)]
 
 viewHighlights : List String -> Html Msg
 viewHighlights highlights =
