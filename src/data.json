@@ -1,6 +1,29 @@
 {
   "work": [
     {
+      "name": "Mosaic Android App",
+      "slug": "mosaic",
+      "hero": { "source": "cloudinary", "id": "mosaic.jpg" },
+        "technologies": ["Android", "ExoPlayer", "DRM'"],
+      "highlights": [
+        "Sole developer for the Android version of Mosaic",
+        "Finished the app within the required timeframe despite delays from external vendors",
+        "Translated iOS design into Material Design for Android while maintaining the Mosaic brand feel",
+        "Achieved a 4 star rating with only one post-release bug fix"
+      ],
+      "company": "Podop, HBO",
+      "position": "Contract Developer",
+          "summary": "A new storytelling experience from Steven Soderbergh that lets you choose your own path.",
+      "description": "Steven Soderbergh, Podop, and HBO teamed up to create a new interactive narrative application. Users are presented with a single first episode and then choose their own path through a murder mystery, revisiting moments through the eyes of different  characters as they explore the world. My job was to port the existing unreleased iOS app to Android, adapting it for Material Design. The biggest, and most interesting, challenge was creating the map view which shows users the scenes they've seen and their choices for what to watch next. The view required custom code to draw nodes and lines that animated smoothly even on lower-end devices. The project also required intimite knowledge of ExoPlayer and DRM solutions.",
+      "video": { "source": "youtube", "id": "UKW6rte9C6A" },
+      "images": [
+        { "source": "cloudinary", "id": "mosaic.jpg" }
+      ],
+      "tags": [
+        "mobile"
+      ]
+    },
+    {
       "name": "NBA Crunch Time with SAP",
       "slug": "crunchtime",
       "hero": { "source": "cloudinary", "id": "game-selection.jpg" },
