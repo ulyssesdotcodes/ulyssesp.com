@@ -3,6 +3,7 @@
     {
       "name": "Mosaic Android App",
       "slug": "mosaic",
+      "link" : "https://play.google.com/store/apps/details?id=com.podop.mosaic",
       "hero": { "source": "cloudinary", "id": "mosaic.jpg" },
         "technologies": ["Android", "ExoPlayer", "DRM'"],
       "highlights": [
