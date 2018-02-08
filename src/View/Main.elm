@@ -29,8 +29,9 @@ view model =
           ]
           ++
           (if fullHeader model.content then
-            [ div [class "twelve columns"] [text "I architect pixels with planning, a small bit of finger movement, and some computing power."]
-            , div [class "twelve columns"] [text "Below are a selection of projects and performances that I enjoyed working on, and some text about what I enjoyed about them."]
+            [ div [class "twelve columns blurb"] [text "I specialize in solo or small team development for responsive, interaction-based experiences, use the most appropriate tools for the job, and deliver them under strict timeframes."]
+            , div [class "twelve columns blurb"] [text "Previous clients include Saatchi & Saatchi, SAP, HBO, and the NBA. Based in NYC, my projects have been installed in NYC, LA, and New Orleans."]
+            , div [class "twelve columns blurb"] [text "Below are a selection of projects and performances that I enjoyed working on, and some text about what I enjoyed about them."]
             ]
            else []
           ))
